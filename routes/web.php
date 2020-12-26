@@ -18,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get("/", [App\Http\Controllers\SKPController::class, "list"]);
+
+/** Bagian SKP */
+Route::prefix("/skp")->group(function() {
+    Route::get("/", [App\Http\Controllers\SKPController::class, "list"]);
+    Route::get("/add", [App\Http\Controllers\SKPController::class, "addHeaderForm"]);
+});

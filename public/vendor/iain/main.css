@@ -1,0 +1,28 @@
+[class*="sidebar-dark-"] {
+    background-color:  #0a7e2b !important;
+}
+
+[class*="sidebar-dark-"] .sidebar a, [class*="sidebar-dark-"] .nav-header, .content-wrapper .content-header {
+    color: #fff !important;
+}
+
+.content-wrapper .content-header {
+    text-shadow: black 0px 0px 15px;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+    color: #fff !important;
+    background-color:  #1ab045 !important;
+}
+
+[class*="sidebar-dark"] .brand-link {
+	border-bottom: 1px solid #278a3e !important;
+	color: #fff !important;
+}
+.content-wrapper {
+	background: #f9f9f9 !important;
+	background-image: url(pat_03.png), url(login-bg.jpg) !important;
+	background-repeat: repeat, no-repeat !important;
+	background-position: 0 0 !important;
+	background-size: 5px 5px, cover !important;
+}

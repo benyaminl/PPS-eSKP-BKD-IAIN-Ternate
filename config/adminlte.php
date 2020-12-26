@@ -358,25 +358,35 @@ return [
     */
 
     'plugins' => [
-        'Datatables' => [
-            'active' => false,
+        // 'Datatables' => [
+        //     'active' => false,
+        //     'files' => [
+        //         [
+        //             'type' => 'js',
+        //             'asset' => false,
+        //             'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+        //         ],
+        //         [
+        //             'type' => 'js',
+        //             'asset' => false,
+        //             'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
+        //         ],
+        //         [
+        //             'type' => 'css',
+        //             'asset' => false,
+        //             'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+        //         ],
+        //     ],
+        // ],
+        'IAIN' => [
+            'active' => true, 
             'files' => [
                 [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+                    'type' => "css", 
+                    'asset' => true,  
+                    'location' => 'vendor/iain/main.css',
                 ],
-                [
-                    'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
-                ],
-                [
-                    'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
-                ],
-            ],
+            ]
         ],
         'Select2' => [
             'active' => false,
@@ -425,6 +435,76 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+        'Datatables' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
+                ],
+                [
+                    'type'     => 'js',
+                    'asset'    => true,
+                    'location' => 'vendor/datatables/input-page.js'
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/dataTables.buttons.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/buttons.flash.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/jszip.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/vfs_fonts.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => 'https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/buttons.print.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/paging-responsive.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/buttons.dataTables.min.css',
+                ],
+                [ // Overwrite the Datatables Bootstrap Processing 
+                    'type' => 'css',
+                    'asset' => true, // see @https://datatables.net/forums/discussion/41654/how-to-display-a-progress-indicator-for-serverside-processing
+                    'location' => 'vendor/datatables/processing.dataTables.css',
                 ],
             ],
         ],

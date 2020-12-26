@@ -1,0 +1,14 @@
+@media (max-width: 576px) {
+    .dataTables_paginate .pagination {
+        /* @see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container */
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center !important;
+    }
+
+    .dataTables_paginate .pagination .previous,
+    .dataTables_paginate .pagination .next {
+        /* https://stackoverflow.com/a/50381928/4906348 */
+        width: 100%;
+    }
+}
