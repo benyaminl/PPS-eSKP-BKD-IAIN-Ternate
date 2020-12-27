@@ -35,6 +35,8 @@ class CreateSKP extends Migration
             $table->integer("angka_kredit");
             $table->integer("kual_mutu");
             $table->string("kuant_output");
+            $table->int("biaya");
+            $table->string("waktu");
             $table->timestamps();
         });
     }
@@ -46,7 +48,7 @@ class CreateSKP extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hedaer_skp');
+        Schema::dropIfExists('header_skp');
         Schema::dropIfExists('detail_skp');
     }
 }

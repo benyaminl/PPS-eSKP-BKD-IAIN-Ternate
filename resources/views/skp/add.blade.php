@@ -11,6 +11,7 @@
 <div class="card">
     @include('alert')
     <div class="card-header">
+        Input SKP Pegawai PNS
     </div>
     <div class="card-body">
         <form method="POST">
@@ -25,16 +26,18 @@
             <td>{{ $departemen }}</td>
             </tr>
         </table>
-        <div class="form-group">
+        <div class="row">
+        <div class="form-group col-6">
             <label>Tanggal Mulai</label>
-            <input type="date" name="tanggal-mulai" class="form-control">
+            <input type="date" name="tanggal-mulai" value="{{ $start }}" class="form-control">
         </div>
-        <div class="form-group">
+        <div class="form-group col-6">
             <label>Tanggal Selesai</label>
-            <input type="date" name="tanggal-selesai" class="form-control">
+            <input type="date" name="tanggal-selesai" value="{{ $end }}" class="form-control">
         </div> 
-        <button class="btn btn-success"><i class="fas fa-plus"></i>Tambah</button>
-        <a href="{{ url('/skp') }}" class="btn btn-danger"><i class="fas fa-plus"></i>Kembali</button>
+        </div>
+        <button class="btn btn-success"><i class="fas fa-plus"></i> Tambah</button>
+        <a href="{{ url('/skp') }}" class="btn btn-danger"><i class="fas fa-backward"></i> Kembali</a>
         </form>
     </div>
 </div>
