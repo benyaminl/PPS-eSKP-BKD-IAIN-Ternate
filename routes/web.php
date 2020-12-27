@@ -24,5 +24,9 @@ Route::prefix("/skp")->group(function() {
     Route::get("/", [App\Http\Controllers\SKPController::class, "list"]);
     Route::get("/add", [App\Http\Controllers\SKPController::class, "addHeaderForm"]);
     Route::get("/{id}/detail", [App\Http\Controllers\SKPController::class, "detailForm"]);
+    Route::get("/{id}/detail/add", [App\Http\Controllers\SKPController::class, "addDetailForm"]);
+
+    // Data Process
     Route::post("/add", [App\Http\Controllers\SKPController::class, "add"]);
+    Route::post("/{id}/detail/add", [App\Http\Controllers\SKPController::class, "addDetail"]);
 });

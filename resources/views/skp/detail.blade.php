@@ -22,7 +22,7 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-12 col-md-6">
                 <table class="table table-borderless">
                     <tr><th>NIP</th><td>{{ $header->Pegawai->nip }}</td></tr>
                     <tr><th>Nama Lengkap</th><td>{{ $header->Pegawai->name }}</td></tr>
@@ -33,7 +33,7 @@
                     <tr><th>Tanggal Akhir</th><td>{{ $header->tanggal_akhir }}</td></tr>
                 </table>
             </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-12 col-md-6">
                 <table class="table table-borderless">
                     <tr><th>NIP</th><td>{{ $header->Atasan->nip }}</td></tr>
                     <tr><th>Nama Lengkap</th><td>{{ $header->Atasan->name }}</td></tr>
@@ -42,6 +42,11 @@
                     <tr><th>Jabatan</th><td>{{ $header->Atasan->jabatan }}</td></tr>
                     <tr><th>Tanggal Pengesahan</th><td>{{ $header->tanggal_pengesahan}}</td></tr>
                 </table>
+            </div>
+            <div class="col-12 mb-3">
+                <a href="{{ url('/skp/'.$header->id.'/detail/add') }}" class="btn btn-success float-right">
+                    <i class="fas fa-plus"></i> Tambah Tugas
+                </a>
             </div>
         </div>
         <table class="table responsive nowrap" style="width:100%" id="table">

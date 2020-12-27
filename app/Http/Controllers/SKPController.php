@@ -56,19 +56,52 @@ class SKPController extends Controller
         $header = HeaderSKP::find($id);
         $detail = $header->detail;
 
+        $nama = Auth::user()->nama ?? "Benyamin";
+        $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
         return \view("skp/detail", [
             "header" => $header,
-            "detail" => $detail
+            "detail" => $detail,
+            "nama" => $nama,
+            "departemen" => $departemen,
         ]);
     }
 
-    public function addDetail(Request $request) {
+    public function addDetailForm($id) {
+        $header = HeaderSKP::find($id);
+        $nama = Auth::user()->nama ?? "Benyamin";
+        $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
+        $start = $header->tanggal_awal; $end = $header->tanggal_akhir;
+        return \view("skp/detail-add", [
+            "header" => $header,
+            "nama" => $nama,
+            "departemen" => $departemen,
+            "start" => $start,
+            "end" => $end,
+        ]);
+    }
+
+    public function addDetail($id, Request $request) {
         $valid = $request->validate([
-            'tugas_jabatan'
+            'tugas_jabatan' => 'required',
+            'angka_kredit' => 'integer|required',
+            'waktu' => 'integer|required',
+            'satuan' => 'required',
+            'kual_mutu' => 'required',
+            'kuant' => 'required',
+            'output' => 'required',
+            'biaya' => 'integer|required',
         ]);
         
         $detail = new DetailSKP();
-        $detail->tugas_jabatan = $valid["tugas_jabatan"];
+        $detail->id_header      = $id;
+        $detail->tugas_jabatan  = $valid["tugas_jabatan"];
+        $detail->angka_kredit   = $valid["angka_kredit"];
+        $detail->kual_mutu      = $valid["kual_mutu"];
+        $detail->waktu          = $valid["waktu"]."/".$valid["satuan"];
+        $detail->kuant_output   = $valid["kuant"]."/".$valid["output"];
+        $detail->biaya          = $valid["biaya"];
+        $detail->save();
+
         return redirect()->back();
     }
 }
