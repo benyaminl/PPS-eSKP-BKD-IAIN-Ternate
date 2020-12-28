@@ -35,7 +35,7 @@ class CreateSKP extends Migration
             $table->integer("angka_kredit");
             $table->integer("kual_mutu");
             $table->string("kuant_output");
-            $table->int("biaya");
+            $table->integer("biaya");
             $table->string("waktu");
             $table->timestamps();
         });
