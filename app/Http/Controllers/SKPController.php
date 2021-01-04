@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailSKP;
 use App\Models\HeaderSKP;
+use App\Models\TugasTambahan;
 use Carbon\Carbon as CarbonCarbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -56,12 +57,14 @@ class SKPController extends Controller
     public function detailForm($id) {
         $header = HeaderSKP::find($id);
         $detail = $header->detail;
+        $detailTambahan = $header->TugasTambahan;
         $isValidasi = strpos(url()->current(), "verifikasi");
         $nama = Auth::user()->nama ?? "Benyamin";
         $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
         return \view("skp/detail", [
             "header" => $header,
             "detail" => $detail,
+            "detailTambahan" => $detailTambahan,
             "nama" => $nama,
             "departemen" => $departemen,
             "isValidasi" => $isValidasi
@@ -69,7 +72,7 @@ class SKPController extends Controller
     }
 
     public function addDetailForm($id) {
-        $header = HeaderSKP::find($id);
+        $header = HeaderSKP::findOrFail($id);
         $nama = Auth::user()->nama ?? "Benyamin";
         $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
         $start = $header->tanggal_awal; $end = $header->tanggal_akhir;
@@ -79,6 +82,17 @@ class SKPController extends Controller
             "departemen" => $departemen,
             "start" => $start,
             "end" => $end,
+        ]);
+    }
+
+    public function addDetailTambahanForm($id) {
+        $header = HeaderSKP::findOrFail($id);
+        $nama = Auth::user()->nama ?? "Benyamin";
+        $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
+        return \view("skp/tugas-tambahan-add", [
+            "id"   => $id,
+            "nama" => $nama,
+            "departemen" => $departemen,
         ]);
     }
 
@@ -104,15 +118,38 @@ class SKPController extends Controller
         $detail->biaya          = $valid["biaya"];
         $detail->save();
 
-        return redirect()->back();
+        return redirect()->back()->with("success", "Berhasil menambah SKP baru");
     }
+
+    public function addDetailTambahan($id, Request $request) {
+        $valid = $request->validate([
+            'tugas-tambahan' => 'required',
+            'sk' => 'required',
+        ]);
+        
+        $detail = new TugasTambahan();
+        $detail->id_header       = $id;
+        $detail->tugas_tambahan  = $valid["tugas-tambahan"];
+        $detail->nomor_sk        = $valid["sk"];
+        $detail->save();
+    
+        return redirect()->back()->with("success", "Berhasil tambah tugas tambahan!");
+    } 
 
     public function deleteDetail(Request $request) {
         $valid = $request->validate(["id" => "required"]);
-        $detail = DetailSKP::find($valid["id"]);
-        $detail->delete();
+        $text = ""; 
+        if ($request->input("type") == "tugas-tambahan") {
+            $detail = TugasTambahan::find($valid["id"]);
+            $detail->delete();
+            $text = "Tugas Tambahan";
+        } else {
+            $detail = DetailSKP::find($valid["id"]);
+            $detail->delete();
+            $text = "Tugas Jabatan";
+        }
 
-        return redirect()->back()->with(["success" => "Berhasil hapus detail SKP Tugas Jabatan"]);
+        return redirect()->back()->with(["success" => "Berhasil hapus detail SKP $text"]);
     }
 
     public function listValidasiSKP(Request $request) {

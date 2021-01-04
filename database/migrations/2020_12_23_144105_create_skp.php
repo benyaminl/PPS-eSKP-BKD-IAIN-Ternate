@@ -39,6 +39,15 @@ class CreateSKP extends Migration
             $table->string("waktu");
             $table->timestamps();
         });
+
+        // Tugas Tambahan
+        Schema::create('detail_tugastambahan', function (Blueprint $table) {
+            $table->id();
+            $table->integer("id_header");
+            $table->string("tugas_tambahan");
+            $table->integer("nomor_sk");
+            $table->timestamps();
+        });
     }
 
     /**

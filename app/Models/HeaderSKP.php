@@ -47,4 +47,8 @@ class HeaderSKP extends Model
     public function Detail() {
         return $this->hasMany("App\Models\DetailSKP", "id_header", "id");
     }
+
+    public function TugasTambahan() {
+        return $this->hasMany("App\Models\TugasTambahan", "id_header", "id");
+    }
 }
