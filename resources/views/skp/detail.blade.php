@@ -15,7 +15,7 @@
     @include('alert')
     <div class="card-header">
         <h3 class="d-inline-block">Detail SKP</h3>
-        <a href="{{ url('/skp') }}" class="btn btn-primary float-right">
+        <a href="{{ url()->previous() }}" class="btn btn-primary float-right">
             <i class="fas fa-backward"></i> Kembali
         </a>
         </form>
@@ -25,7 +25,7 @@
             <div class="col-12 col-md-6">
                 <table class="table table-borderless">
                     <tr><th>NIP</th><td>{{ $header->Pegawai->nip }}</td></tr>
-                    <tr><th>Nama Lengkap</th><td>{{ $header->Pegawai->name }}</td></tr>
+                    <tr><th>Nama Lengkap</th><td>{{ $header->Pegawai->nama }}</td></tr>
                     <tr><th>Unit Kerja</th><td>{{ $header->Pegawai->biro }}</td></tr>
                     <tr><th>Pangkat/Golongan Ruang</th><td>{{ $header->Pegawai->pangkat."/".$header->Pegawai->golongan}}</td></tr>
                     <tr><th>Jabatan</th><td>{{ $header->Pegawai->jabatan }}</td></tr>
@@ -36,7 +36,7 @@
             <div class="col-12 col-md-6">
                 <table class="table table-borderless">
                     <tr><th>NIP</th><td>{{ $header->Atasan->nip }}</td></tr>
-                    <tr><th>Nama Lengkap</th><td>{{ $header->Atasan->name }}</td></tr>
+                    <tr><th>Nama Lengkap</th><td>{{ $header->Atasan->nama }}</td></tr>
                     <tr><th>Unit Kerja</th><td>{{ $header->Atasan->biro }}</td></tr>
                     <tr><th>Pangkat/Golongan Ruang</th><td>{{ $header->Atasan->pangkat."/".$header->Atasan->golongan}}</td></tr>
                     <tr><th>Jabatan</th><td>{{ $header->Atasan->jabatan }}</td></tr>
@@ -44,9 +44,30 @@
                 </table>
             </div>
             <div class="col-12 mb-3">
+                {{-- Hanya tampilkan kalau SKP sudah validated --}}
+                @if ($header->status_skp == 3)
+                <a href="{{ url('/skp/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
+                    <i class="fas fa-plus"></i> Print SKP
+                </a>           
+                @endif
+                @if ($header->status_skp == 0)
                 <a href="{{ url('/skp/'.$header->id.'/detail/add') }}" class="btn btn-success float-right">
                     <i class="fas fa-plus"></i> Tambah Tugas
                 </a>
+                <form method="POST" class="d-inline-block float-right mr-2">
+                    @method("PUT")
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Ajukan Validasi</button>
+                </form>
+                @endif
+                {{-- Kalau untuk Validasi Maka --}}
+                @if ($isValidasi)
+                <form method="POST" class="d-inline-block float-right mr-2">
+                    @method("PUT")
+                    @csrf
+                    <button type="submit" class="btn btn-success">Data Lengkap</button>
+                </form>
+                @endif
             </div>
         </div>
         <table class="table responsive nowrap" style="width:100%" id="table">
@@ -72,6 +93,9 @@
                     <td>{{ $detail[$i]->biaya ?? "-" }}</td>
                     <td>
                         <form method="POST">
+                            {{-- Method Spoff --}} 
+                            @method("DELETE")
+                            @csrf
                             <input type="hidden" value='{{ $detail[$i]->id }}' name='id'>
                             <button class="btn btn-danger" type=submit><i class="fa fa-trash"></i></button>
                         </form>

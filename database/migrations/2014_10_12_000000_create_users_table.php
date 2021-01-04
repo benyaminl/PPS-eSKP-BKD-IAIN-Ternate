@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('pegawai', function (Blueprint $table) {
             $table->id();
             $table->string("username")->unique();
-            $table->string('name');
+            $table->string('nama');
             $table->string('nip');
             $table->string('pangkat');
             $table->string('golongan');

@@ -251,7 +251,7 @@ return [
         ],
         [
             'text'        => 'Verifikasi SKP',
-            'url'         => 'skp/verify',
+            'url'         => 'skp/verifikasi',
             'icon'        => 'fas fa-user-check',
             // 'label'       => 4,
             // 'label_color' => 'success',

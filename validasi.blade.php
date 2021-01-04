@@ -4,10 +4,10 @@
 {{-- Allow DataTable --}}
 @section('plugins.Datatables', true)
 
-@section('title', 'List SKP Pegawai | ESKP BKD IAIN TERNATE')
+@section('title', 'List Validasi SKP Pegawai | ESKP BKD IAIN TERNATE')
 
 @section('content_header')
-    <h1>SKP IAIN Ternate</h1>
+    <h1>List SKP IAIN Ternate</h1>
 @stop
 
 @section('content')
@@ -19,7 +19,7 @@
             <label class="d-inline-block mr-2">Tanggal Start</label>
             <input type="date" class="d-inline-block form-control" style="max-width: 59%" value="{{ $start }}" name="tanggal-start">
         </div>
-        <div class="d-md-inline-block ml-md-2 mb-2 d-block" style="min-width: 285px">
+        <div class="d-md-inline-block ml-md-2 mb-2 d-block">
             <label class="d-inline-block mr-2">Tanggal End</label>
             <input type="date" class="d-inline-block form-control" style="max-width: 59%" value="{{ $end }}" name="tanggal-end">
         </div>
@@ -27,10 +27,7 @@
             <button type="submit" class="btn btn-primary">Filter</button>
         </div>
         </form>
-        <a href="{{ url('/skp/add') }}" class="btn btn-success float-right">
-            <i class="fas fa-plus"></i> Add
-        </a>
-        </form>
+    
     </div>
     <div class="card-body">
         <table class="table responsive nowrap" style="width:100%" id="table">
@@ -51,7 +48,14 @@
                     <td>{{ $d->getStatusString() }}</td>
                     <td>{{ $d->Pegawai->biro }}</td>
                     <td>
-                        <a href="{{ url("skp/".$d->id."/detail") }}" class="btn btn-primary">Detail</a>
+                        <form method="post">
+                            <input type="hidden" value="{{ $d->id }}" name="id">
+                            <button type="submit" class="btn btn-primary">Validasi</button>
+                        </form>
+                        <form method="post">
+                            <input type="hidden" value="{{ $d->id }}" name="id">
+                            <button type="submit" class="btn btn-danger">Kembalikan</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

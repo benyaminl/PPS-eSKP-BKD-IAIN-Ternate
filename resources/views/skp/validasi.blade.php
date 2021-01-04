@@ -27,18 +27,14 @@
             <button type="submit" class="btn btn-primary">Filter</button>
         </div>
         </form>
-        <a href="{{ url('/skp/add') }}" class="btn btn-success float-right">
-            <i class="fas fa-plus"></i> Add
-        </a>
-        </form>
     </div>
     <div class="card-body">
         <table class="table responsive nowrap" style="width:100%" id="table">
             <thead>
                 <th>ID</th>
                 <th>Tanggal Pengajuan</th>
-                <th>Tanggal Pengesahan</th>
                 <th>Status</th>
+                <th>Nama Pegawai</th>
                 <th>Departemen</th>
                 <th class="action">Action</th>
             </thead>
@@ -47,11 +43,11 @@
                 <tr>
                     <td>{{ $d->id }} </td>
                     <td>{{ $d->tanggal_pengajuan ?? "-" }}</td>
-                    <td>{{ $d->tanggal_pengesahan ?? "-" }}</td>
                     <td>{{ $d->getStatusString() }}</td>
+                    <td>{{ $d->Pegawai->nama }}</td>
                     <td>{{ $d->Pegawai->biro }}</td>
                     <td>
-                        <a href="{{ url("skp/".$d->id."/detail") }}" class="btn btn-primary">Detail</a>
+                        <a href="{{ url("skp/verifikasi/".$d->id."/detail") }}" class="btn btn-primary">Detail</a>
                     </td>
                 </tr>
                 @endforeach

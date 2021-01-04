@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DetailSKP;
 use App\Models\HeaderSKP;
+use Carbon\Carbon as CarbonCarbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class SKPController extends Controller
     public function list(Request $request) {
         $start = $request->input("tanggal-start") ?? date("Y")."-01-01";
         $end   = $request->input("tanggal-end") ?? date("Y")."-12-31";
-        $data  = HeaderSKP::where("tanggal_awal", ">=", $start)->where("tanggal_akhir", ">=", $end)->get();
+        $data  = HeaderSKP::where("tanggal_awal", ">=", $start)->where("tanggal_akhir", "<=", $end)->get();
 
         return \view("skp/index", [
             "data" => $data,
@@ -55,7 +56,7 @@ class SKPController extends Controller
     public function detailForm($id) {
         $header = HeaderSKP::find($id);
         $detail = $header->detail;
-
+        $isValidasi = strpos(url()->current(), "verifikasi");
         $nama = Auth::user()->nama ?? "Benyamin";
         $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
         return \view("skp/detail", [
@@ -63,6 +64,7 @@ class SKPController extends Controller
             "detail" => $detail,
             "nama" => $nama,
             "departemen" => $departemen,
+            "isValidasi" => $isValidasi
         ]);
     }
 
@@ -103,5 +105,56 @@ class SKPController extends Controller
         $detail->save();
 
         return redirect()->back();
+    }
+
+    public function deleteDetail(Request $request) {
+        $valid = $request->validate(["id" => "required"]);
+        $detail = DetailSKP::find($valid["id"]);
+        $detail->delete();
+
+        return redirect()->back()->with(["success" => "Berhasil hapus detail SKP Tugas Jabatan"]);
+    }
+
+    public function listValidasiSKP(Request $request) {
+        $start = $request->input("tanggal-start") ?? date("Y")."-01-01";
+        $end   = $request->input("tanggal-end") ?? date("Y")."-12-31";
+        $data  = HeaderSKP::whereStatusSkp(1)->where("tanggal_awal", ">=", $start)->where("tanggal_akhir", "<=", $end)->get();
+
+
+        return \view("skp/validasi", [
+            "data" => $data,
+            "start" => $start,
+            "end" => $end
+        ]);
+    }
+
+    public function ajukanValidasi($id) {
+        $header = HeaderSKP::find($id);
+
+        $header->status_skp = 1;
+        $header->tanggal_pengajuan = Carbon::now();
+        $header->save();
+
+        return redirect()->back()->with("success", "Berhasil ajukan untuk di validasi!");
+    }
+
+    public function validasiSKP(Request $request) {
+        $valid = $request->validate(["id" => "required|number"]);
+        $header = HeaderSKP::find($valid["id"]);
+
+        $header->status_skp = 2;
+        $header->save();
+
+        return redirect()->back()->with("success", "Berhasil divalidasi!");
+    }
+
+    public function rejectSKP(Request $request) {
+        $valid = $request->validate(["id" => "required|number"]);
+        $header = HeaderSKP::find($valid["id"]);
+
+        $header->status_skp = 0;
+        $header->save();
+
+        return redirect()->back()->with("success", "Status Kembali menjadi Draf!");       
     }
 }
