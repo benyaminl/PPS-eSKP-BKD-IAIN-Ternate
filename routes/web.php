@@ -28,6 +28,9 @@ Route::prefix("/skp")->group(function() {
     Route::get("/{id}/detail/add-tgstambahan", [App\Http\Controllers\SKPController::class, "addDetailTambahanForm"]);
     Route::get("/verifikasi", [App\Http\Controllers\SKPController::class, "listValidasiSKP"]);
     Route::get("/verifikasi/{id}/detail", [App\Http\Controllers\SKPController::class, "detailForm"]);
+    // Pengesahan LIST
+    Route::get("/pengesahan", [App\Http\Controllers\SKPController::class, "listPengesahanSKP"]);
+    Route::get("/pengesahan/{id}/detail", [App\Http\Controllers\SKPController::class, "detailForm"]);
 
     // Data Process
     Route::post("/add", [App\Http\Controllers\SKPController::class, "add"]);
@@ -44,7 +47,9 @@ Route::prefix("/skp")->group(function() {
     Route::patch("/verifikasi/{id}/detail", [App\Http\Controllers\SKPController::class, "validasiSKP"]);
     // Reject SKP
     Route::delete("/verifikasi/{id}/detail", [App\Http\Controllers\SKPController::class, "rejectSKP"]);
+    // Pengesahan 
+    Route::post("/pengesahan/{id}/detail", [App\Http\Controllers\SKPController::class, "pengesahanSKP"]);
 
     // Print Halaman
-    Route::get("/print/{id}", [App\Http\Controllers\SKPController::class, "printSKP"]);
+    Route::get("/{id}/print", [App\Http\Controllers\SKPController::class, "printSKP"]);
 });

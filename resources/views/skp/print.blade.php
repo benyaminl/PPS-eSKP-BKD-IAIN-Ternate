@@ -1,21 +1,74 @@
 {{-- Ini Halaman Print --}}
 <style>
-.kegiatan {
-    min-width: 350px;
-}
-.text-center {
-    text-align: center;
-}
-.bg-grey {
-    background: lightgrey;
-}
+    h1,h2,h3,h4,h5,h6 {
+        margin:0;
+    }
+    table {
+        border-spacing: 0;
+    }
+    .kegiatan {
+        min-width: 350px;
+    }
+    .text-center {
+        text-align: center;
+    }
+    .bg-grey {
+        background: lightgrey;
+    }
+    .clearboth {
+        clear: both;
+    }
+    .logo {
+        margin-left: 2cm;
+        width: 3cm;
+        height: 3cm;
+        float: left;
+    }
+    
+    .kop {
+        width: 15cm;
+        height: 3cm;
+        float: left;
+    }
+    
+    .img-fluid {
+        width: 100%
+    }
+    
+    body {
+        max-width: 21cm;
+    }
+
+    .text-bold {
+        font-weight: bold;
+    }
+
 </style>
+<div>
+    <div class="logo">
+        <img class="img-fluid" src="{{ url('/vendor/iain/logo.png') }}">
+    </div>
+    <div class="kop text-center">
+        <h2>KEMENTRIAN AGAMA REPUBLIK INDONESIA</h2>
+        <h4>INSTITUT AGAMA ISLAM NEGERI TERNATE</h4>
+        <p>Jalan Lumba-lumba Kelurahan Dufa-dufa Ternate 97727<br/>Telepon: (0921) 3121426 Faximile: (0921) 3123773<br/>Website: www.iain-ternate.ac.id</p>
+    </div>
+    <div class="clearboth"></div>
+</div>
+<hr/>
+<br/>
+<br/>
+<br/>
+<h2 class="text-center">FORMULIR SASARAN KERJA</h2>
+<h4 class="text-center">PEGAWAI NEGERI SIPIL</h4>
+<br/>
+<br/>
 <table border=1 style="width: 21cm;">
-    <tr>
+    <tr class="text-bold">
         <td>No</td>
         <td colspan=2>I. PEJABAT PENILAI</td>
         <td>No</td>
-        <td colspan=4>II. PEGAWAI PNS YANG DINILAI</td>
+        <td colspan=4>II. PEGAWAI NEGERI SIPIL YANG DINILAI</td>
     </tr>
     <tr>
         <td>1</td>
@@ -64,13 +117,13 @@
     </tr>
     {{-- BODY dari Tugas Jabatan --}}
     {{-- Header Nya --}}
-    <tr class="text-center">
+    <tr class="text-bold text-center">
         <td rowspan=2>NO</td>
         <td rowspan=2 colspan=2>III. KEGIATAN TUGAS JABATAN</td>
         <td rowspan=2>Angka<br/>Kredit</td>
         <td class="text-cente" colspan=4>TARGET</td>
     </tr>
-    <tr>
+    <tr class="text-bold">
         <td>KUANT/OUTPUT</td>
         <td>KUAL/MUTU</td>
         <td>WAKTU</td>
@@ -92,11 +145,11 @@
     <tr>
         <td>{{ $i+1 }}</td>
         <td colspan=2>{{ $detail[$i]->tugas_jabatan }}</td>
-        <td>{{ $detail[$i]->angka_kredit }}</td>
+        <td>{{ ($detail[$i]->angka_kredit > 0) ? $detail[$i]->angka_kredit : "-" }}</td>
         <td>{{ $detail[$i]->kuant_output }}</td>
         <td>{{ $detail[$i]->kual_mutu }}</td>
         <td>{{ $detail[$i]->waktu }}</td>
-        <td>{{ $detail[$i]->biaya }}</td>
+        <td>{{ ($detail[$i]->biaya == 0) ? $detail[$i]->biaya : "-" }}</td>
     </tr>
     @endfor
     {{-- End Body --}} 
@@ -118,6 +171,7 @@
             {{ $header->Atasan->nama }}
         </td>
         <td style="width: 50%">
+            Ternate, {{ $header->tanggal_pengesahan }}<br/>
             Pegawai Negeri Sipil Yang Dinilai,
             <br/>
             <br/>
@@ -127,3 +181,7 @@
         </td>
     </tr>
 </table>
+<br/>
+<br/>
+<br/>
+<br/>

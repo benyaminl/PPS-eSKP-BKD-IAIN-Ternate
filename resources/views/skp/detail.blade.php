@@ -83,6 +83,16 @@
                     <button type="submit" class="btn btn-danger">Kembalikan - Belum Lengkap</button>
                 </form>
                 @endif
+
+                @if ($isPengesahan AND $header->status_skp == 2)
+                {{-- Kalau Pengesahan --}}
+                <form method="POST" class="d-inline-block float-right mr-2">
+                    @method("POST")
+                    @csrf
+                    <input type="hidden" name='type' value='lengkap'>
+                    <button type="submit" class="btn btn-success">Sah kan SKP</button>
+                </form>
+                @endif
             </div>
         </div>
 

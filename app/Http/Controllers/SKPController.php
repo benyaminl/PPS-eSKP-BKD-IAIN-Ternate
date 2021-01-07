@@ -59,6 +59,8 @@ class SKPController extends Controller
         $detail = $header->detail;
         $detailTambahan = $header->TugasTambahan;
         $isValidasi = strpos(url()->current(), "verifikasi");
+        $isPengesahan = strpos(url()->current(), "pengesahan");
+
         $nama = Auth::user()->nama ?? "Benyamin";
         $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
         return \view("skp/detail", [
@@ -67,7 +69,8 @@ class SKPController extends Controller
             "detailTambahan" => $detailTambahan,
             "nama" => $nama,
             "departemen" => $departemen,
-            "isValidasi" => $isValidasi
+            "isValidasi" => $isValidasi,
+            "isPengesahan" => $isPengesahan
         ]);
     }
 
@@ -165,6 +168,24 @@ class SKPController extends Controller
         ]);
     }
 
+    public function listPengesahanSKP(Request $request) {
+        $start = $request->input("tanggal-start") ?? date("Y")."-01-01";
+        $end   = $request->input("tanggal-end") ?? date("Y")."-12-31";
+        $data  = HeaderSKP::whereStatusSkp(2)
+            ->where("tanggal_awal", ">=", $start)
+            ->where("tanggal_akhir", "<=", $end)
+            ->whereRaw("header_skp.id_pegawai in (select id_bawahan from hubungan_pegawai where id_atasan = ?)", [Auth::id() ?? "2"])
+            // ->toSql();
+            ->get();
+        // dd($data);
+        return \view("skp/pengesahan", [
+            "data" => $data,
+            "start" => $start,
+            "end" => $end
+        ]);
+    }
+
+
     public function ajukanValidasi($id) {
         $header = HeaderSKP::find($id);
 
@@ -207,7 +228,7 @@ class SKPController extends Controller
         $header->tanggal_pengesahan = Carbon::now();
         $header->save();
 
-        return redirect()->back()->with("success", "Anda berhasil mengesahkan SKP!");       
+        return redirect()->back()->with("success", "Anda berhasil mengesahkan SKP! Sekarang bawahan anda dapat melakukan print terhadap formulir SKP.");       
     }
 
     public function printSKP($id) {
