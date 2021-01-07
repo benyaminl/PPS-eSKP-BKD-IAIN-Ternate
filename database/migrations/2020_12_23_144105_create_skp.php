@@ -46,7 +46,7 @@ class CreateSKP extends Migration
             $table->id();
             $table->integer("id_header");
             $table->string("tugas_tambahan");
-            $table->integer("nomor_sk");
+            $table->string("nomor_sk");
             $table->timestamps();
         });
     }

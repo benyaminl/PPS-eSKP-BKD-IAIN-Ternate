@@ -32,6 +32,9 @@
                     <tr><th>Tanggal Mulai</th><td>{{ $header->tanggal_awal }}</td></tr>
                     <tr><th>Tanggal Akhir</th><td>{{ $header->tanggal_akhir }}</td></tr>
                     <tr><th>Status SKP</th><td>{{ $header->getStatusString() }}</td></tr>
+                    @if ($header->getStatusString() == "Valid")
+                    <tr><th>Divalidasi Oleh</th><td>{{ $header->Validator->nama }}</td></tr>
+                    @endif
                 </table>
             </div>
             <div class="col-12 col-md-6">
@@ -68,7 +71,7 @@
                 {{-- Kalau untuk Validasi Maka --}}
                 @if ($isValidasi AND $header->status_skp == 1)
                 <form method="POST" class="d-inline-block float-right mr-2">
-                    @method("PUT")
+                    @method("PATCH")
                     @csrf
                     <input type="hidden" name='type' value='lengkap'>
                     <button type="submit" class="btn btn-success">Data Lengkap</button>

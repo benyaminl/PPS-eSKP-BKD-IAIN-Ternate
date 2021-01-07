@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'SKP BKD IAIN Ternate',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -253,6 +253,13 @@ return [
             'text'        => 'Verifikasi SKP',
             'url'         => 'skp/verifikasi',
             'icon'        => 'fas fa-user-check',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Pengesahan SKP',
+            'url'         => 'skp/pengesahan',
+            'icon'        => 'fas fa-calendar-check',
             // 'label'       => 4,
             // 'label_color' => 'success',
         ],

@@ -39,28 +39,28 @@
         <div class="row">
             <div class="col-12 col-md-6">
                 <label>Tugas Jabatan</label>
-                <input type="text" name="tugas_jabatan" class="form-control">
+                <input type="text" name="tugas_jabatan" value="{{ old('tugas_jabatan') }}" class="form-control">
             </div> 
             <div class="col-12 col-md-6">
                 <label>Angka Kredit</label>
-                <input type="number" min="0" name="angka_kredit" class="form-control">
+                <input type="number" min="0" name="angka_kredit" value="{{ old('angka_kredit') ?? 0 }}" class="form-control">
             </div>
             <div class="col-12 col-md-5">
                 <label>Kuantitas/Output</label>
-                <input type="number" min="0" name="kuant" class="form-control"> 
+                <input type="number" min="0" name="kuant" value="{{ old('kuant') }}" class="form-control"> 
             </div>
             <div class="col-md-1 d-sm-none d-md-block"><div class="mb-5" style="margin-bottom: 2.3rem !important;"></div>/</div>
             <div class="col-12 col-md-3">
                 <label> </label>
-                <input type="text" min="0" name="output" class="form-control mt-1" placeholder="dokumen,laporan,buah,dsb">
+                <input type="text" min="0" name="output" value="{{ old('output') }}" class="form-control mt-1" placeholder="dokumen,laporan,buah,dsb">
             </div>
             <div class="col-12">
                 <label>Kualitas Mutu</label>
-                <input type="text" min="0" name="kual_mutu" class="form-control">
+                <input type="number" min="0" placeholder="10/100/1000" name="kual_mutu" value="{{ old('kual_mutu') }}" class="form-control">
             </div>
             <div class="col-12 col-md-5">
                 <label>Waktu/Satuan</label>
-                <input type="number" min="0" name="waktu" class="form-control"> 
+                <input type="number" min="0" name="waktu" value="{{ old('waktu') }}" class="form-control"> 
             </div>
             <div class="col-md-1 d-sm-none d-md-block"><div class="mb-5" style="margin-bottom: 2.3rem !important;"></div>/</div>
             <div class="col-12 col-md-3">
@@ -78,7 +78,7 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text">Rp.</div>
                   </div>
-                  <input type="number" name="biaya" min="0" class="form-control" placeholder="ex 100.000">
+                  <input type="number" name="biaya" value="{{ old('biaya') ?? 0}}" min="0" class="form-control" placeholder="ex 100.000">
                 </div>
             </div>
         </div>

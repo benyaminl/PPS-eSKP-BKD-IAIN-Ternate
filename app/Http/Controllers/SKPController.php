@@ -181,7 +181,7 @@ class SKPController extends Controller
         $header = HeaderSKP::find($id);
 
         $header->status_skp = 2;
-        $header->divalidasi_oleh = Auth::id() ?? 1;
+        $header->divalidasi_oleh = Auth::id() ?? 3;
         $header->tanggal_validasi = Carbon::now();
         $header->save();
 
@@ -192,10 +192,30 @@ class SKPController extends Controller
         $header = HeaderSKP::find($id);
 
         $header->status_skp = 0;
-        $header->divalidasi_oleh = Auth::id() ?? 1;
+        $header->divalidasi_oleh = Auth::id() ?? 3;
         $header->tanggal_validasi = Carbon::now();
         $header->save();
 
         return redirect()->back()->with("success", "Status Kembali menjadi Draf!");       
+    }
+
+    public function pengesahanSKP($id, Request $request) {
+        $header = HeaderSKP::find($id);
+
+        $header->status_skp = 3;
+        $header->disahkan_oleh = Auth::id() ?? 2;
+        $header->tanggal_pengesahan = Carbon::now();
+        $header->save();
+
+        return redirect()->back()->with("success", "Anda berhasil mengesahkan SKP!");       
+    }
+
+    public function printSKP($id) {
+        $data = HeaderSKP::find($id);
+        $detail = $data->detail;
+        return \view("skp/print", [
+            "header" => $data,
+            "detail" => $detail
+        ]);
     }
 }

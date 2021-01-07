@@ -33,6 +33,10 @@ class HeaderSKP extends Model
         );
     }
 
+    public function Validator() {
+        return $this->hasOne("App\Models\Pegawai", "id", "divalidasi_oleh");
+    }
+
     public function getStatusString() {
         switch($this->status_skp) {
             case 1: 
