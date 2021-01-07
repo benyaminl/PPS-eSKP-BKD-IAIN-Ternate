@@ -52,4 +52,6 @@ Route::prefix("/skp")->group(function() {
 
     // Print Halaman
     Route::get("/{id}/print", [App\Http\Controllers\SKPController::class, "printSKP"]);
+    // Ini URL untuk QR Code
+    Route::get("/{id}/print/qr", [App\Http\Controllers\SKPController::class, "generateQR"]);
 });
