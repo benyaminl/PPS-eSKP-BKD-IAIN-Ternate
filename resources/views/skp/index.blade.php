@@ -46,8 +46,8 @@
                 @foreach($data as $d) 
                 <tr>
                     <td>{{ $d->id }} </td>
-                    <td>{{ $d->tanggal_pengajuan ?? "-" }}</td>
-                    <td>{{ $d->tanggal_pengesahan ?? "-" }}</td>
+                    <td>{{ ($d->tanggal_pengajuan != null) ? $d->tanggal_pengajuan->format("d-m-Y H:i") : "-" }}</td>
+                    <td>{{ ($d->tanggal_pengesahan != null) ? $d->tanggal_pengesahan->format("d-m-Y H:i") : "-" }}</td>
                     <td>{{ $d->getStatusString() }}</td>
                     <td>{{ $d->Pegawai->biro }}</td>
                     <td>

@@ -46,12 +46,12 @@
             </div>
             <div class="col-12 mb-3">
                 {{-- Hanya tampilkan kalau SKP sudah validated --}}
-                @if ($header->status_skp == 3)
+                @if ($header->status_skp == 3 && $isValidasi == false)
                 <a href="{{ url('/skp/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
                     <i class="fas fa-print"></i> Print SKP
                 </a>           
                 @endif
-                @if ($header->status_skp == 0)
+                @if ($header->status_skp == 0 && $isValidasi == false)
                 <a href="{{ url('/skp/'.$header->id.'/detail/add') }}" class="btn btn-success float-right">
                     <i class="fas fa-plus"></i> Tambah Tugas Jabatan
                 </a>
@@ -66,11 +66,18 @@
                 </form>
                 @endif
                 {{-- Kalau untuk Validasi Maka --}}
-                @if ($isValidasi)
+                @if ($isValidasi AND $header->status_skp == 1)
                 <form method="POST" class="d-inline-block float-right mr-2">
                     @method("PUT")
                     @csrf
+                    <input type="hidden" name='type' value='lengkap'>
                     <button type="submit" class="btn btn-success">Data Lengkap</button>
+                </form>
+                <form method="POST" class="d-inline-block float-right mr-2">
+                    @method("DELETE")
+                    @csrf
+                    <input type="hidden" name='type' value='kembalikan'>
+                    <button type="submit" class="btn btn-danger">Kembalikan - Belum Lengkap</button>
                 </form>
                 @endif
             </div>

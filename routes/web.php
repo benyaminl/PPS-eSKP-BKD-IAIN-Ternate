@@ -41,7 +41,7 @@ Route::prefix("/skp")->group(function() {
     Route::put("/{id}/detail", [App\Http\Controllers\SKPController::class, "ajukanValidasi"]);
 
     // Validasi SKP
-    Route::patch("/verifikasi", [App\Http\Controllers\SKPController::class, "validasiSKP"]);
+    Route::patch("/verifikasi/{id}/detail", [App\Http\Controllers\SKPController::class, "validasiSKP"]);
     // Reject SKP
-    Route::delete("/verifikasi", [App\Http\Controllers\SKPController::class, "rejectSKP"]);
+    Route::delete("/verifikasi/{id}/detail", [App\Http\Controllers\SKPController::class, "rejectSKP"]);
 });

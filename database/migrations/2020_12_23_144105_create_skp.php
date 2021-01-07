@@ -22,6 +22,7 @@ class CreateSKP extends Migration
             $table->timestamp("tanggal_pengajuan")->nullable();
             $table->integer("disahkan_oleh")->nullable();
             $table->timestamp("tanggal_pengesahan")->nullable();
+            $table->timestamp("tanggal_validasi")->nullable();
             $table->integer("divalidasi_oleh")->nullable();
             $table->integer("status_skp")->default(0);
             $table->integer("id_pegawai");

@@ -13,7 +13,13 @@ class HeaderSKP extends Model
     # const UPDATED_AT = 'update_date';
     protected $primaryKey = 'id';
     protected $table = 'header_skp';
-    
+    protected $casts = [
+        'tanggal_validasi' => 'datetime',
+        'tanggal_pengajuan' => 'datetime',
+        'tanggal_pengesahan' => 'datetime',
+        'tanggal_draft' => 'datetime'
+    ]; 
+
     public function Pegawai() {
         return $this->hasOne("App\Models\Pegawai", "id", "id_pegawai");
     }    
@@ -39,7 +45,10 @@ class HeaderSKP extends Model
                 return "Disahkan";
                 break;
             default :
-                return "Draft";
+                if ($this->divalidasi_oleh != null) 
+                    return "Rejected";
+                else 
+                    return "Draft";
                 break;
         }
     }

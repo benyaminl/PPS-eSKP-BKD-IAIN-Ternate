@@ -169,27 +169,31 @@ class SKPController extends Controller
         $header = HeaderSKP::find($id);
 
         $header->status_skp = 1;
+        $header->divalidasi_oleh = null;
+        $header->tanggal_validasi = null;
         $header->tanggal_pengajuan = Carbon::now();
         $header->save();
 
         return redirect()->back()->with("success", "Berhasil ajukan untuk di validasi!");
     }
 
-    public function validasiSKP(Request $request) {
-        $valid = $request->validate(["id" => "required|number"]);
-        $header = HeaderSKP::find($valid["id"]);
+    public function validasiSKP($id, Request $request) {
+        $header = HeaderSKP::find($id);
 
         $header->status_skp = 2;
+        $header->divalidasi_oleh = Auth::id() ?? 1;
+        $header->tanggal_validasi = Carbon::now();
         $header->save();
 
         return redirect()->back()->with("success", "Berhasil divalidasi!");
     }
 
-    public function rejectSKP(Request $request) {
-        $valid = $request->validate(["id" => "required|number"]);
-        $header = HeaderSKP::find($valid["id"]);
+    public function rejectSKP($id, Request $request) {
+        $header = HeaderSKP::find($id);
 
         $header->status_skp = 0;
+        $header->divalidasi_oleh = Auth::id() ?? 1;
+        $header->tanggal_validasi = Carbon::now();
         $header->save();
 
         return redirect()->back()->with("success", "Status Kembali menjadi Draf!");       
