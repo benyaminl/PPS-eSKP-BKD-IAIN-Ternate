@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\LabelAlignment;
 use App\Models\DetailSKP;
 use App\Models\HeaderSKP;
 use App\Models\TugasTambahan;
@@ -236,7 +238,30 @@ class SKPController extends Controller
         $detail = $data->detail;
         return \view("skp/print", [
             "header" => $data,
-            "detail" => $detail
+            "detail" => $detail,
+            "id" => $id
         ]);
+    }
+
+
+    public function generateQR($id) {
+        $header = HeaderSKP::find($id);
+        // GENERATE QR CODE
+        $qr = new QrCode("https://skp.iain-ternate.ac.id/verify?=".$id);
+        $qr->setSize(150);
+        // dd(public_path("/vendor/iain/logo.png"));
+        // Adding Logo
+        $qr->setLogoPath(public_path("/vendor/iain/logo.png"));
+        $qr->setLogoSize(80, 80);
+        // Adding Label
+        $qr->setLabel('Sudah Disahkan oleh '.$header->Atasan->nama, 8, public_path("/vendor/iain/calibrib.ttf"), LabelAlignment::CENTER());
+        // OUTPUT QR CODE
+        // DIRECTLY OUTPUT AS IMAGE
+        // <img src="1-simple-qr.php"/>
+        // header("Content-Type: {$qr->getContentType()}");
+        // @see https://laravel.com/docs/8.x/responses#response-objects
+        return response($qr->writeString())
+                ->header("Content-Disposition", 'filename="qr-'.$id.'.png"')
+                ->header("Content-Type", $qr->getContentType());
     }
 }

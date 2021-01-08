@@ -58,7 +58,6 @@
 <hr/>
 <br/>
 <br/>
-<br/>
 <h2 class="text-center">FORMULIR SASARAN KERJA</h2>
 <h4 class="text-center">PEGAWAI NEGERI SIPIL</h4>
 <br/>
@@ -142,7 +141,7 @@
     --}}
     {{-- Body --}}
     @for($i=0; $i< count($detail); $i++) 
-    <tr>
+    <tr class="text-center">
         <td>{{ $i+1 }}</td>
         <td colspan=2>{{ $detail[$i]->tugas_jabatan }}</td>
         <td>{{ ($detail[$i]->angka_kredit > 0) ? $detail[$i]->angka_kredit : "-" }}</td>
@@ -163,20 +162,17 @@
 <table style="min-width: 21cm;" class="text-center">
     <tr>
         <td style="width: 50%">
-            Pejabat Penilai,
             <br/>
             <br/>
-            <br/>
+            Pejabat Penilai,<br/>
+            <img src='{{ url("skp/".$id."/print/qr") }}'>
             <br/>
             {{ $header->Atasan->nama }}
         </td>
         <td style="width: 50%">
             Ternate, {{ $header->tanggal_pengesahan }}<br/>
             Pegawai Negeri Sipil Yang Dinilai,
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <div style="height: 185px"></div>
             {{ $header->Pegawai->nama }}
         </td>
     </tr>
@@ -185,3 +181,4 @@
 <br/>
 <br/>
 <br/>
+<script>window.print()</script>

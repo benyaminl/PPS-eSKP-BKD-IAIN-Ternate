@@ -33,3 +33,8 @@ Halamn berada di `/resources/view/<nama view>.blade.php`. Untuk template halaman
 ```
 
 Lebih lengkap lihat https://github.com/jeroennoten/Laravel-AdminLTE/wiki/4.-Usage
+
+### QR Generator
+Pada bagian pengesahan SKP, digunakan QR Generator milik endroid/qr-code
+untuk melihat docs nya bisa dibaca di https://github.com/endroid/qr-code#advanced-usage
+Halaman nya pada aplikasi ini ada di http://<base url>/skp/<id>/print/qr
