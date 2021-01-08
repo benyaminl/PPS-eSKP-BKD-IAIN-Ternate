@@ -53,3 +53,11 @@ Route::prefix("/skp")->group(function() {
     // Print Halaman
     Route::get("/{id}/print", [App\Http\Controllers\SKPController::class, "printSKP"]);
 });
+
+/** Penilaian SKP **/
+Route::prefix("/skp/penilaian")->group(function() {
+    // List SKP punya anak buah dari Atasan nya
+    Route::get("/", [App\Http\Controllers\PenilaianSKPController::class, "listSKP"]);
+    // Detail SKP yang dinilai/realisasi
+    Route::get("/{id}/detail", [App\Http\Controllers\PenilaianSKPController::class, "realisasiForm"]);
+});

@@ -4,17 +4,17 @@
 {{-- Allow DataTable --}}
 @section('plugins.Datatables', true)
 
-@section('title', 'List SKP Pegawai | ESKP BKD IAIN TERNATE')
+@section('title', 'Realisasi SKP Pegawai | ESKP BKD IAIN TERNATE')
 
 @section('content_header')
-    <h1>Detail SKP IAIN Ternate</h1>
+    <h1>Realisasi SKP IAIN Ternate</h1>
 @stop
 
 @section('content')
 <div class="card">
     @include('alert')
     <div class="card-header">
-        <h3 class="d-inline-block">Detail SKP</h3>
+        <h3 class="d-inline-block">Detail SKP - Realisasi</h3>
         <a href="{{ url()->previous() }}" class="btn btn-primary float-right">
             <i class="fas fa-backward"></i> Kembali
         </a>
@@ -97,17 +97,27 @@
         </div>
 
         <h3>Tugas Jabatan</h3>
-        <div class="table-responsive">
+        <div class="table-reponsive">
         <table class="table responsive nowrap" style="width:100%" id="tugasJabatan">
             <thead>
-                <th>No</th>
-                <th>Tugas Jabatan</th>
-                <th>Angka Kredit</th>
-                <th>Kuat/Output</th>
-                <th>Kual/Mutu</th>
-                <th>Waktu</th>
-                <th>Biaya</th>
-                <th class="action">Action</th>
+                <tr>
+                    <th rowspan=2>No</th>
+                    <th rowspan=2>Tugas Jabatan</th>
+                    <th colspan=5>Target</th>
+                    <th colspan=5>Realisasi</th>
+                </tr>
+                <tr>
+                    <th>Angka<br/>Kredit</th>
+                    <th>Kuat/<br/>Output</th>
+                    <th>Kual/<br/>Mutu</th>
+                    <th>Waktu</th>
+                    <th>Biaya</th>
+                    <th>Angka<br/>Kredit</th>
+                    <th>Kuat/<br/>Output</th>
+                    <th>Kual/<br/>Mutu</th>
+                    <th>Waktu</th>
+                    <th>Biaya</th>
+                </tr>
             </thead>
             <tbody>
                 @for ($i = 0; $i<count($detail); $i++) 
@@ -119,15 +129,11 @@
                     <td>{{ $detail[$i]->kual_mutu ?? "-" }}</td>
                     <td>{{ $detail[$i]->waktu ?? "-" }}</td>
                     <td>{{ $detail[$i]->biaya ?? "-" }}</td>
-                    <td>
-                        <form method="POST">
-                            {{-- Method Spoff --}} 
-                            @method("DELETE")
-                            @csrf
-                            <input type="hidden" value='{{ $detail[$i]->id }}' name='id'>
-                            <button class="btn btn-danger" type=submit><i class="fa fa-trash"></i></button>
-                        </form>
-                    </td>
+                    <td>{{ $detail[$i]->angka_kredit }}</td>
+                    <td>{{ $detail[$i]->kuant_output ?? "-" }}</td>
+                    <td>{{ $detail[$i]->kual_mutu ?? "-" }}</td>
+                    <td>{{ $detail[$i]->waktu ?? "-" }}</td>
+                    <td>{{ $detail[$i]->biaya ?? "-" }}</td>
                 </tr>
                 @endfor
             </tbody>
@@ -135,7 +141,6 @@
         </div>
         <br/>
         <h3>Tugas Tambahan</h3>
-        <div class="table-responsive">
         <table class="table responsive nowrap" style="width:100%" id="tugasTambahan">
             <thead>
                 <th>No</th>
@@ -163,7 +168,6 @@
                 @endfor
             </tbody>
         </table>
-        </div>
     </div>
 </div>
 @stop
