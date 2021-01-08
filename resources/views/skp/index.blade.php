@@ -7,7 +7,7 @@
 @section('title', 'List SKP Pegawai | ESKP BKD IAIN TERNATE')
 
 @section('content_header')
-    <h1>SKP IAIN Ternate</h1>
+<h1>SKP IAIN Ternate</h1>
 @stop
 
 @section('content')
@@ -15,17 +15,17 @@
     @include('alert')
     <div class="card-header">
         <form method="GET" class="d-inline-block" style="max-width: 90%">
-        <div class="d-md-inline-block ml-md-2 mb-2 d-block" style="min-width: 285px">
-            <label class="d-inline-block mr-2">Tanggal Start</label>
-            <input type="date" class="d-inline-block form-control" style="max-width: 59%" value="{{ $start }}" name="tanggal-start">
-        </div>
-        <div class="d-md-inline-block ml-md-2 mb-2 d-block" style="min-width: 285px">
-            <label class="d-inline-block mr-2">Tanggal End</label>
-            <input type="date" class="d-inline-block form-control" style="max-width: 59%" value="{{ $end }}" name="tanggal-end">
-        </div>
-        <div class="d-inline-block ml-3 mb-2">
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </div>
+            <div class="d-md-inline-block ml-md-2 mb-2 d-block" style="min-width: 285px">
+                <label class="d-inline-block mr-2">Tanggal Start</label>
+                <input type="date" class="d-inline-block form-control" style="max-width: 59%" value="{{ $start }}" name="tanggal-start">
+            </div>
+            <div class="d-md-inline-block ml-md-2 mb-2 d-block" style="min-width: 285px">
+                <label class="d-inline-block mr-2">Tanggal End</label>
+                <input type="date" class="d-inline-block form-control" style="max-width: 59%" value="{{ $end }}" name="tanggal-end">
+            </div>
+            <div class="d-inline-block ml-3 mb-2">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
         </form>
         <a href="{{ url('/skp/add') }}" class="btn btn-success float-right">
             <i class="fas fa-plus"></i> Add
@@ -42,8 +42,9 @@
                 <th>Departemen</th>
                 <th class="action">Action</th>
             </thead>
+
             <tbody>
-                @foreach($data as $d) 
+                @foreach($data as $d)
                 <tr>
                     <td>{{ $d->id }} </td>
                     <td>{{ ($d->tanggal_pengajuan != null) ? $d->tanggal_pengajuan->format("d-m-Y H:i") : "-" }}</td>
@@ -55,7 +56,7 @@
                     </td>
                 </tr>
                 @endforeach
-            </tbody>
+            </tbody> 
         </table>
     </div>
 </div>
@@ -66,6 +67,6 @@
 @stop --}}
 @section('js')
 <script>
-$("#table").DataTable();
+    $("#table").DataTable();
 </script>
 @stop

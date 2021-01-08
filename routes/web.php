@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", [App\Http\Controllers\SKPController::class, "list"]);
 
 /** Bagian SKP */
-Route::prefix("/skp")->group(function() {
+Route::prefix("/skp")->group(function () {
     Route::get("/", [App\Http\Controllers\SKPController::class, "list"]);
     Route::get("/add", [App\Http\Controllers\SKPController::class, "addHeaderForm"]);
     Route::get("/{id}/detail", [App\Http\Controllers\SKPController::class, "detailForm"]);
@@ -57,12 +57,29 @@ Route::prefix("/skp")->group(function() {
 });
 
 /** Penilaian SKP **/
-Route::prefix("/skp/penilaian")->group(function() {
+Route::prefix("/skp/penilaian")->group(function () {
     // List SKP punya anak buah dari Atasan nya
     Route::get("/", [App\Http\Controllers\PenilaianSKPController::class, "listSKP"]);
     // Detail SKP yang dinilai/realisasi
     Route::get("/{id}/detail", [App\Http\Controllers\PenilaianSKPController::class, "realisasiForm"]);
-    
+
     // Simpan Nilai Tugas Jabatan
     Route::post("/{id}/detail", [App\Http\Controllers\PenilaianSKPController::class, "simpanNilai"]);
 });
+
+/** Bagian BKD */
+Route::get("/bkd", [App\Http\Controllers\BkdController::class, "index"]);
+//Route::post("/bkd/create","BkdController@create");
+
+Route::prefix("/bkd")->group(function () {
+    Route::get("/", [App\Http\Controllers\BkdController::class, "index"]);
+    Route::get("/pendidikan", [App\Http\Controllers\BkdController::class, "bidpend"]);
+    Route::post("/create", [App\Http\Controllers\BkdController::class, "create"]);
+    Route::get("/pendidikan/{No}/edit", [App\Http\Controllers\BkdController::class, "edit"]);
+    Route::post("/pendidikan/{No}/update", [App\Http\Controllers\BkdController::class, "update"]);
+    Route::get("/pendidikan/{No}/delete", [App\Http\Controllers\BkdController::class, "delete"]);
+});
+
+/** Bagian LKD */
+Route::get("/lkd/add", [App\Http\Controllers\LKDController::class, "addlkd"]);
+//Route::post("/bkd/create","BkdController@create");

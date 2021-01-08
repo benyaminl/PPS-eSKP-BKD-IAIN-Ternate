@@ -270,6 +270,46 @@ return [
             // 'label'       => 4,
             // 'label_color' => 'success',
         ],
+        ['header' => 'BEBAN KERJA DOSEN'],
+        // [
+        //     'text' => 'blog',
+        //     'url'  => 'admin/blog',
+        //     'can'  => 'manage-blog',
+        // ],
+        [
+            'text'        => 'Identitas Dosen',
+            'url'         => 'bkd/',
+            'icon'        => 'fas fa-fw fa-user',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
+        [
+            'text'        => 'List BKD',
+            'url'         => '#',
+            'icon'        => 'fas fa-list',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
+        [
+            'text'    => 'Input RBKD',
+            'url'         => 'bkd/pendidikan',
+            'icon'    => 'fas fa-fw fa-plus',
+        ],
+        [
+            'text'    => 'Verifikasi RBKD',
+            'url'         => 'bkd/verify',
+            'icon'    => 'fas fa fa-user-check',
+        ],
+        [
+            'text'    => 'Input LKD',
+            'url'         => 'lkd/add',
+            'icon'    => 'fas fa-fw fa-plus',
+        ],
+        [
+            'text'    => 'Verifikasi LKD',
+            'url'         => 'lkd/verify',
+            'icon'    => 'fas fa fa-user-check',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -393,11 +433,11 @@ return [
         //     ],
         // ],
         'IAIN' => [
-            'active' => true, 
+            'active' => true,
             'files' => [
                 [
-                    'type' => "css", 
-                    'asset' => true,  
+                    'type' => "css",
+                    'asset' => true,
                     'location' => 'vendor/iain/main.css',
                 ],
             ]
