@@ -80,3 +80,7 @@ Route::prefix("/bkd")->group(function () {
     Route::post("/pendidikan/{id}/update", [App\Http\Controllers\BkdController::class, "update"]);
     Route::get("/pendidikan/{id}/delete", [App\Http\Controllers\BkdController::class, "delete"]);
 });
+
+Route::prefix("/lkd")->group(function() {
+    Route::get("/add", [App\Http\Controllers\LKDController::class, "addlkd"]);
+});

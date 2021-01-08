@@ -17,6 +17,7 @@ class CreatePenilaianSKP extends Migration
         Schema::create('penilaian_skp', function (Blueprint $table) {
             $table->id();
             $table->integer("id_header");
+            $table->integer("id_detail");
             $table->integer("angka_kredit");
             $table->integer("kual_mutu");
             $table->string("kuant_output");
@@ -27,7 +28,7 @@ class CreatePenilaianSKP extends Migration
             $table->timestamps();
         });
         
-        // tabel penilaian perilaku kerja
+        // tabel penilaianï¿½perilaku kerja
         Schema::create('penilaian_perilaku_kerja', function (Blueprint $table) {
             $table->id();
             $table->integer("id_header");

@@ -41,7 +41,7 @@
         <th class="action">Action</th>
       </thead>
       <tbody>
-        @foreach(@)
+        {{-- @foreach(@) --}}
         @foreach($add_lkd as $lkd)
         <tr>
           <td>{{$lkd->No}}</td>
