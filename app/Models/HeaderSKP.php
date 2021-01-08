@@ -17,6 +17,8 @@ class HeaderSKP extends Model
         'tanggal_validasi' => 'datetime',
         'tanggal_pengajuan' => 'datetime',
         'tanggal_pengesahan' => 'datetime',
+        'tanggal_awal' => 'datetime',
+        'tanggal_akhir' => 'datetime',
         'tanggal_draft' => 'datetime'
     ]; 
 
@@ -63,5 +65,33 @@ class HeaderSKP extends Model
 
     public function TugasTambahan() {
         return $this->hasMany("App\Models\TugasTambahan", "id_header", "id");
+    }
+
+    public function getStatusPenilaian() {
+        $jumlah = PenilaianSKP::whereIdHeader($this->id)->count();
+        return $jumlah > 0;
+    }
+
+    /**
+     * Fungsi untuk mengembalikan status penilaian dalam string
+     * @return string
+     */
+    public function getStatusPenilaianString() {
+        if ($this->getStatusPenilaian())
+            return "Tugas Jabatan Sudah Dinilai";
+        else 
+            return "Belum Dinilai";
+    }
+
+    public function getNilaiTugasTambahan() {
+        $jumlah = $this->Detail->count();
+
+        if ($jumlah <= 3)
+            return 1;
+        else if ($jumlah >=4 AND $jumlah <= 6)
+            return 2;
+        else 
+            return 3;
+        
     }
 }

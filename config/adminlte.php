@@ -263,6 +263,13 @@ return [
             // 'label'       => 4,
             // 'label_color' => 'success',
         ],
+        [
+            'text'        => 'Penilaian SKP',
+            'url'         => 'skp/penilaian',
+            'icon'        => 'fas fa-poll',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

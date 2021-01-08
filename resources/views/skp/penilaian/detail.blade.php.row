@@ -103,17 +103,8 @@
         <table class="table responsive nowrap" style="width:100%" id="tugasJabatan">
             <thead>
                 <tr>
-                    <th rowspan=2>No</th>
-                    <th rowspan=2>Tugas Jabatan</th>
-                    <th colspan=5 class="text-center">Target</th>
-                    <th colspan=5 class="text-center">Realisasi</th>
-                </tr>
-                <tr>
-                    <th>Angka<br/>Kredit</th>
-                    <th>Kuat/<br/>Output</th>
-                    <th>Kual/<br/>Mutu</th>
-                    <th>Waktu</th>
-                    <th>Biaya</th>
+                    <th>No</th>
+                    <th>Tugas Jabatan</th>
                     <th>Angka<br/>Kredit</th>
                     <th>Kuat/<br/>Output</th>
                     <th>Kual/<br/>Mutu</th>
@@ -131,23 +122,27 @@
                     <td>{{ $detail[$i]->kual_mutu ?? "-" }}</td>
                     <td>{{ $detail[$i]->waktu ?? "-" }}</td>
                     <td>{{ $detail[$i]->biaya ?? "-" }}</td>
+                </tr>
+                <tr>
+                    <td class="text-white">{{ $i+1 }}</td>
+                    <td><i>Realisasi : </i></td>
                     <td>
                         <input type="hidden" name="id[]" value="{{ $detail[$i]->id }}">
-                        <input type="text" class="form-control" name="angka_kredit[]" value="{{ old('angka_kredit['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->angka_kredit : "" }}" style="max-width:60px">
+                        <input type="text" class="form-control" name="angka_kredit[]" >
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="kuant_output[]" value="{{ old('kuant_output['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->kuant_output  : ""}}" style="max-width:60px">
+                        <input type="text" class="form-control" name="kuant_output[]" >
                         /{{ explode("/",$detail[$i]->kuant_output)[1] ?? "-" }}
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="kual_mutu[]" value="{{ old('kual_mutu['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->kual_mutu  : ""}}" style="max-width:60px">
+                        <input type="text" class="form-control" name="kual_mutu[]" >
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="waktu[]" value="{{ old('waktu['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->waktu  : ""}}" style="max-width:60px">
+                        <input type="text" class="form-control" name="waktu[]" >
                         /{{ explode("/",$detail[$i]->waktu)[1] ?? "-" }}
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="biaya[]" value="{{ old('biaya['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->biaya : "" }}" style="max-width:60px">
+                        <input type="text" class="form-control" name="biaya[]" >
                     </td>
                 </tr>
                 @endfor
@@ -164,6 +159,7 @@
                 <th>No</th>
                 <th>Deskripsi Tugas Tambahan</th>
                 <th>Nomor SK</th>
+                <th class="action">Action</th>
             </thead>
             <tbody>
                 @for ($i = 0; $i<count($detailTambahan); $i++) 
@@ -171,13 +167,18 @@
                     <td>{{ $i+1 }} </td>
                     <td>{{ $detailTambahan[$i]->tugas_tambahan ?? "-" }}</td>
                     <td>{{ $detailTambahan[$i]->nomor_sk ?? "-" }}</td>
+                    <td>
+                        <form method="POST">
+                            {{-- Method Spoff --}} 
+                            @method("DELETE")
+                            @csrf
+                            <input type="hidden" value='{{ $detailTambahan[$i]->id }}' name='id'>
+                            <input type="hidden" value='tugas-tambahan' name='type'>
+                            <button class="btn btn-danger" type=submit><i class="fa fa-trash"></i></button>
+                        </form>
+                    </td>
                 </tr>
                 @endfor
-                <tr>
-                    <td class="d-none">{{ $i }}</td>
-                    <td class="d-none"></td>
-                    <td class="text-right" colspan=3><b>Total Nilai Tugas Tambahan : {{ $nilaiTugasTambahan }}</b></td>
-                </tr>
             </tbody>
         </table>
         </div>

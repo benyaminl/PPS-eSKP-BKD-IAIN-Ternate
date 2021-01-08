@@ -4,10 +4,10 @@
 {{-- Allow DataTable --}}
 @section('plugins.Datatables', true)
 
-@section('title', 'List SKP Pegawai | ESKP BKD IAIN TERNATE')
+@section('title', 'List Penilaian SKP Pegawai | ESKP BKD IAIN TERNATE')
 
 @section('content_header')
-    <h1>SKP IAIN Ternate</h1>
+    <h1>Penilaian SKP IAIN Ternate</h1>
 @stop
 
 @section('content')
@@ -27,18 +27,14 @@
             <button type="submit" class="btn btn-primary">Filter</button>
         </div>
         </form>
-        <a href="{{ url('/skp/add') }}" class="btn btn-success float-right">
-            <i class="fas fa-plus"></i> Add
-        </a>
-        </form>
+        
     </div>
     <div class="card-body">
         <table class="table responsive nowrap" style="width:100%" id="table">
             <thead>
                 <th>ID</th>
-                <th>Tanggal Pengajuan</th>
-                <th>Tanggal Pengesahan</th>
-                <th>Status</th>
+                <th>Periode</th>
+                <th>Status Penilaian</th>
                 <th>Departemen</th>
                 <th class="action">Action</th>
             </thead>
@@ -46,12 +42,11 @@
                 @foreach($data as $d) 
                 <tr>
                     <td>{{ $d->id }} </td>
-                    <td>{{ ($d->tanggal_pengajuan != null) ? $d->tanggal_pengajuan->format("d-m-Y H:i") : "-" }}</td>
-                    <td>{{ ($d->tanggal_pengesahan != null) ? $d->tanggal_pengesahan->format("d-m-Y H:i") : "-" }}</td>
-                    <td>{{ $d->getStatusString() }}</td>
+                    <td>{{ $d->tanggal_awal->format("[d-m-Y]")." - ".$d->tanggal_akhir->format("[d-m-Y]")}}</td>
+                    <td>{{ $d->getStatusPenilaianString() }}</td>
                     <td>{{ $d->Pegawai->biro }}</td>
                     <td>
-                        <a href="{{ url("skp/".$d->id."/detail") }}" class="btn btn-primary">Detail</a>
+                        <a href="{{ url("skp/penilaian/".$d->id."/detail") }}" class="btn btn-primary">Penilaian</a>
                     </td>
                 </tr>
                 @endforeach
