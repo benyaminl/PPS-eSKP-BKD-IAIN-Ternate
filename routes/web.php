@@ -47,7 +47,7 @@ Route::prefix("/skp")->group(function () {
     Route::patch("/verifikasi/{id}/detail", [App\Http\Controllers\SKPController::class, "validasiSKP"]);
     // Reject SKP
     Route::delete("/verifikasi/{id}/detail", [App\Http\Controllers\SKPController::class, "rejectSKP"]);
-    // Pengesahan 
+    // Pengesahan
     Route::post("/pengesahan/{id}/detail", [App\Http\Controllers\SKPController::class, "pengesahanSKP"]);
 
     // Print Halaman
@@ -73,13 +73,10 @@ Route::get("/bkd", [App\Http\Controllers\BkdController::class, "index"]);
 
 Route::prefix("/bkd")->group(function () {
     Route::get("/", [App\Http\Controllers\BkdController::class, "index"]);
+    Route::get("/add", [App\Http\Controllers\BkdController::class, "addHeaderForm"]);
     Route::get("/pendidikan", [App\Http\Controllers\BkdController::class, "bidpend"]);
     Route::post("/create", [App\Http\Controllers\BkdController::class, "create"]);
-    Route::get("/pendidikan/{No}/edit", [App\Http\Controllers\BkdController::class, "edit"]);
-    Route::post("/pendidikan/{No}/update", [App\Http\Controllers\BkdController::class, "update"]);
-    Route::get("/pendidikan/{No}/delete", [App\Http\Controllers\BkdController::class, "delete"]);
+    Route::get("/pendidikan/{id}/edit", [App\Http\Controllers\BkdController::class, "edit"]);
+    Route::post("/pendidikan/{id}/update", [App\Http\Controllers\BkdController::class, "update"]);
+    Route::get("/pendidikan/{id}/delete", [App\Http\Controllers\BkdController::class, "delete"]);
 });
-
-/** Bagian LKD */
-Route::get("/lkd/add", [App\Http\Controllers\LKDController::class, "addlkd"]);
-//Route::post("/bkd/create","BkdController@create");
