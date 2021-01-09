@@ -212,13 +212,19 @@ class BKDController extends Controller
         return redirect()->back()->with("success", "Anda berhasil mengesahkan SKP! Sekarang bawahan anda dapat melakukan print terhadap formulir RBKD.");
     }
 
-    public function printBKD($id)
+    public function printRBKD($id)
     {
         $data = HeaderBKD::find($id);
         $detail = $data->detail;
-        return \view("bkd/print", [
-            "header" => $data,
-            "detail" => $detail,
+        $kategori = DetailBKD::query()->select("Bidang")
+                    ->where("id_header", "=", $id)
+                    ->groupBy("Bidang")
+                    ->get();
+        // dd($kategori);
+        return \view("bkd/rbkd-print", [
+            "header"   => $data,
+            "detail"   => $detail,
+            "kategori" => $kategori,
             "id" => $id
         ]);
     }
