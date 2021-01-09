@@ -47,7 +47,6 @@ class PenilaianBKDController extends Controller
         return \view("bkd/penilaian/detail", [
             "header" => $header,
             "detail" => $detail,
-            "detailTambahan" => $detailTambahan,
             "nama" => $nama,
             "nilaiJabatan" => $nilaiJabatan,
             //   "departemen" => $departemen,

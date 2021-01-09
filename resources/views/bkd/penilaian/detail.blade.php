@@ -53,7 +53,7 @@
                         <td>{{ $header->tanggal_akhir }}</td>
                     </tr>
                     <tr>
-                        <th>Status SKP</th>
+                        <th>Status LKD</th>
                         <td>{{ $header->getStatusString() }}</td>
                     </tr>
                     @if ($header->getStatusString() == "Valid")
@@ -93,19 +93,17 @@
                 </table>
             </div>
             <div class="col-12 mb-3">
-                {{-- Hanya tampilkan kalau SKP sudah validated --}}
+                {{-- Hanya tampilkan kalau LKD sudah validated --}}
                 @if ($header->status_skp == 3 && $isValidasi == false)
                 <a href="{{ url('/skp/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
                     <i class="fas fa-print"></i> Print SKP
                 </a>
                 @endif
-                @if ($header->status_skp == 0 && $isValidasi == false)
-                <a href="{{ url('/skp/'.$header->id.'/detail/add') }}" class="btn btn-success float-right">
-                    <i class="fas fa-plus"></i> Tambah Tugas Jabatan
+                @if ($header->status_lkd == 0 && $isValidasi == false)
+                <a href="{{ url('/lkd/'.$header->id.'/detail/add') }}" class="btn btn-success float-right">
+                    <i class="fas fa-plus"></i> Tambah LKD
                 </a>
-                <a href="{{ url('/skp/'.$header->id.'/detail/add-tgstambahan') }}" class="btn btn-info mr-2 float-right">
-                    <i class="fas fa-plus"></i> Tambah Tugas Tambahan
-                </a>
+
 
                 <form method="POST" class="d-inline-block float-right mr-2">
                     @method("PUT")
@@ -135,21 +133,21 @@
                     @method("POST")
                     @csrf
                     <input type="hidden" name='type' value='lengkap'>
-                    <button type="submit" class="btn btn-success">Sah kan SKP</button>
+                    <button type="submit" class="btn btn-success">Sah kan LKD</button>
                 </form>
                 @endif
             </div>
         </div>
 
-        <h3>Tugas Jabatan</h3>
+        <h3>LKD</h3>
         <form method="POST">
             @csrf
             <div class="table-responsive">
-                <table class="table responsive nowrap" style="width:100%" id="tugasJabatan">
+                <table class="table responsive nowrap" style="width:100%" id="lkd">
                     <thead>
                         <tr>
                             <th rowspan=2>No</th>
-                            <th rowspan=2>Tugas Jabatan</th>
+                            <th rowspan=2>LKD</th>
                             <th colspan=5 class="text-center">Target</th>
                             <th colspan=5 class="text-center">Realisasi</th>
                         </tr>
@@ -201,29 +199,7 @@
             </div>
         </form>
         <br />
-        <h3>Tugas Tambahan</h3>
-        <div class="table-responsive">
-            <table class="table responsive nowrap" style="width:100%" id="tugasTambahan">
-                <thead>
-                    <th>No</th>
-                    <th>Deskripsi Tugas Tambahan</th>
-                    <th>Nomor SK</th>
-                </thead>
-                <tbody>
-                    @for ($i = 0; $i<count($detailTambahan); $i++) <tr>
-                        <td>{{ $i+1 }} </td>
-                        <td>{{ $detailTambahan[$i]->tugas_tambahan ?? "-" }}</td>
-                        <td>{{ $detailTambahan[$i]->nomor_sk ?? "-" }}</td>
-                        </tr>
-                        @endfor
-                        <tr>
-                            <td class="d-none">{{ $i }}</td>
-                            <td class="d-none"></td>
-                            <td class="text-right" colspan=3><b>Total Nilai Tugas Tambahan : {{ $nilaiTugasTambahan }}</b></td>
-                        </tr>
-                </tbody>
-            </table>
-        </div>
+
     </div>
 </div>
 @stop

@@ -134,7 +134,7 @@ class BKDController extends Controller
     {
         $start = $request->input("tanggal-start") ?? date("Y") . "-01-01";
         $end   = $request->input("tanggal-end") ?? date("Y") . "-12-31";
-        $data  = HeaderBKD::whereStatusBKD(1)->where("tanggal_awal", ">=", $start)->where("tanggal_akhir", "<=", $end)->get();
+        $data  = HeaderBKD::wherestatus_bkd(1)->where("tanggal_awal", ">=", $start)->where("tanggal_akhir", "<=", $end)->get();
 
 
         return \view("bkd/validasi", [
