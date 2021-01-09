@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class BKDController extends Controller
 {
-    public function index()
-    {
-        $pegawai = \App\Models\Pegawai::all();
-        return view('bkd.index', ['pegawai' => $pegawai]);
-    }
+
     public function list(Request $request)
     {
         $start = $request->input("tanggal-start") ?? date("Y") . "-01-01";
@@ -34,12 +30,12 @@ class BKDController extends Controller
     public function addHeaderForm()
     {
         $nama = Auth::user()->nama ?? "Benyamin";
-        $fak_dept = Auth::user()->fak_dept ?? "Tarbiyah";
+        $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
         $start = date("Y") . "-01-01";
         $end   = date("Y") . "-12-31";
         return \view("bkd/add", [
             "nama" => $nama,
-            "fak_dept" => $fak_dept,
+            "departement" => $departemen,
             "start" => $start,
             "end" => $end
         ]);
@@ -72,7 +68,7 @@ class BKDController extends Controller
 
         $nama = Auth::user()->nama ?? "Benyamin";
         $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
-        return \view("skp/detail", [
+        return \view("bkd/detail", [
             "header" => $header,
             "detail" => $detail,
 
@@ -104,21 +100,21 @@ class BKDController extends Controller
     public function addDetail($id, Request $request)
     {
         $valid = $request->validate([
-            'bidang' => 'required',
-            'jenis_kegiatan' => 'required',
-            'bukti_penugasan' => 'required',
+            'Bidang' => 'required',
+            'Jenis_Kegiatan' => 'required',
+            'Bukti_Penugasan' => 'required',
             'SKS_RBKD' => 'required',
         ]);
 
         $detail = new DetailBKD();
         $detail->id_header      = $id;
-        $detail->bidang  = $valid["bidang"];
-        $detail->jenis_kegiatan   = $valid["jenis_kegiatan"];
-        $detail->bukti_penugasan      = $valid["bukti_penugasan"];
-        $detail->SKS_RBKD          = $valid["waktu"];
+        $detail->bidang  = $valid["Bidang"];
+        $detail->jenis_kegiatan   = $valid["Jenis_Kegiatan"];
+        $detail->bukti_penugasan      = $valid["Bukti_Penugasan"];
+        $detail->SKS_RBKD          = $valid["SKS_RBKD"];
         $detail->save();
 
-        return redirect()->back()->with("success", "Berhasil menambah BKD baru");
+        return redirect()->back()->with("success", "Berhasil menambah RBKD baru");
     }
 
     public function deleteDetail(Request $request)
