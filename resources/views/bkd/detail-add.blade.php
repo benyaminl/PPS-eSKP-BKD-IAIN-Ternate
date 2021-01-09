@@ -39,11 +39,19 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <label>Bidang</label>
-                    <input type="text" name="Bidang" value="{{ old('bidang') }}" class="form-control">
+                    <select class="form-control mt-1" name="bidang" value="{{old('bidang)}}" class="form-control">
+                        <option value=0>Silahkan pilih Bidang</option>
+                        <option>Kinerja Bidang Pendidikan</option>
+                        <option>Kinerja Bidang Penelitian</option>
+                        <option>Kinerja Bidang Pengabdian Masyarakat</option>
+                        <option>Kinerja Penunjang Lainnya</option>
+                        <option>Kewajiban Khusus Profesor</option>
+                    </select>
+
                 </div>
                 <div class="col-12 col-md-6">
                     <label>Jenis Kegiatan</label>
-                    <input type="text" min="0" name="Jenis_Kegiatan" value="{{ old('Jenis_Kegiatan') ?? 0 }}" class="form-control">
+                    <input type="text" name="jenis_kegiatan" value="{{ old('jenis_kegiatan') }}" class="form-control">
                 </div>
                 <div class="col-12 col-md-5">
                     <label>Bukti Penugasan</label>
@@ -56,7 +64,6 @@
                     <label> SKS</label>
                     <input type="text" min="0" name="output" value="{{ old('output') }}" class="form-control mt-1" placeholder="dokumen,laporan,buah,dsb">
                 </div>
-
 
             </div>
             <br />
