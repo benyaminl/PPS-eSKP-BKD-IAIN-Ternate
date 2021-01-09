@@ -95,7 +95,7 @@
             <div class="col-12 mb-3">
                 {{-- Hanya tampilkan kalau LKD sudah validated --}}
                 @if ($header->status_bkd == 3 && $isValidasi == false)
-                <a href="{{ url('/bkd/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
+                <a href="{{ url('/bkd/penilaian/'.$header->id.'/printLKD') }}" class="btn btn-secondary float-right">
                     <i class="fas fa-print"></i> Print LKD
                 </a>
                 @endif
@@ -161,6 +161,7 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         @for ($i = 0; $i<count($detail); $i++) <tr>
                             <td>{{ $i+1 }} </td>
                             <td>{{ $detail[$i]->Bidang ?? "-" }}</td>

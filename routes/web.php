@@ -114,5 +114,5 @@ Route::prefix("/bkd/penilaian")->group(function () {
     // Simpan Nilai Tugas Jabatan
     Route::post("/{id}/detail", [App\Http\Controllers\PenilaianBKDController::class, "simpanNilai"]);
     // Print Halaman LKD
-    Route::get("/{id}/print", [App\Http\Controllers\PenilaianBKDController::class, "printLKD"]);
+    Route::get("/{id}/printLKD", [App\Http\Controllers\PenilaianBKDController::class, "printLKD"]);
 });
