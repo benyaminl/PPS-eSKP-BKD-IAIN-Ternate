@@ -201,7 +201,7 @@
             {{ $header->Atasan->nama }}
         </td>
         <td style="width: 50%">
-            Ternate, {{ $header->tanggal_pengesahan }}<br/>
+            Ternate, {{ $header->tanggal_pengesahan->format("d-m-Y") }}<br/>
             Pegawai Negeri Sipil Yang Dinilai,
             <div style="height: 185px"></div>
             {{ $header->Pegawai->nama }}
