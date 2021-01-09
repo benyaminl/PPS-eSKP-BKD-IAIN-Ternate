@@ -18,7 +18,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-3">
-				@foreach($data_identitas as $identitas)
+				@foreach($pegawai as $identitas)
 
 				<!-- Profile Image -->
 				<div class="card card-primary card-outline">
@@ -49,9 +49,6 @@
 				</div>
 				<!-- /.card -->
 			</div>
-
-
-
 
 			<div class="col-md-9">
 				<div class="card">

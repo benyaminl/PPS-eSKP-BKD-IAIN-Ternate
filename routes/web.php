@@ -67,20 +67,48 @@ Route::prefix("/skp/penilaian")->group(function () {
     Route::post("/{id}/detail", [App\Http\Controllers\PenilaianSKPController::class, "simpanNilai"]);
 });
 
-/** Bagian BKD */
-Route::get("/bkd", [App\Http\Controllers\BkdController::class, "index"]);
-//Route::post("/bkd/create","BkdController@create");
 
+/** Bagian BKD */
 Route::prefix("/bkd")->group(function () {
-    Route::get("/", [App\Http\Controllers\BkdController::class, "index"]);
-    Route::get("/add", [App\Http\Controllers\BkdController::class, "addHeaderForm"]);
-    Route::get("/pendidikan", [App\Http\Controllers\BkdController::class, "bidpend"]);
-    Route::post("/create", [App\Http\Controllers\BkdController::class, "create"]);
-    Route::get("/pendidikan/{id}/edit", [App\Http\Controllers\BkdController::class, "edit"]);
-    Route::post("/pendidikan/{id}/update", [App\Http\Controllers\BkdController::class, "update"]);
-    Route::get("/pendidikan/{id}/delete", [App\Http\Controllers\BkdController::class, "delete"]);
+    Route::get("/", [App\Http\Controllers\BKDController::class, "list"]);
+    Route::get("/add", [App\Http\Controllers\BKDController::class, "addHeaderForm"]);
+    Route::get("/{id}/detail", [App\Http\Controllers\BKDController::class, "detailForm"]);
+    Route::get("/{id}/detail/add", [App\Http\Controllers\BKDController::class, "addDetailForm"]);
+    Route::get("/verifikasi", [App\Http\Controllers\BKDController::class, "listValidasiBKD"]);
+    Route::get("/verifikasi/{id}/detail", [App\Http\Controllers\BKDController::class, "detailForm"]);
+    // Pengesahan LIST
+    Route::get("/pengesahan", [App\Http\Controllers\BKDController::class, "listPengesahanBKD"]);
+    Route::get("/pengesahan/{id}/detail", [App\Http\Controllers\BKDController::class, "detailForm"]);
+
+    // Data Process
+    Route::post("/add", [App\Http\Controllers\BKDController::class, "add"]);
+    Route::post("/{id}/detail/add", [App\Http\Controllers\BKDController::class, "addDetail"]);
+    // delete detail
+    Route::delete("/{id}/detail", [App\Http\Controllers\BKDController::class, "deleteDetail"]);
+
+    // Ajukan Validasi
+    Route::put("/{id}/detail", [App\Http\Controllers\BKDController::class, "ajukanValidasi"]);
+
+    // Validasi BKD
+    Route::patch("/verifikasi/{id}/detail", [App\Http\Controllers\BKDController::class, "validasiBKD"]);
+    // Reject BKD
+    Route::delete("/verifikasi/{id}/detail", [App\Http\Controllers\BKDController::class, "rejectBKD"]);
+    // Pengesahan
+    Route::post("/pengesahan/{id}/detail", [App\Http\Controllers\SKPController::class, "pengesahanBKD"]);
+
+    // Print Halaman
+    Route::get("/{id}/print", [App\Http\Controllers\BKDController::class, "printBKD"]);
+    // Ini URL untuk QR Code
+    Route::get("/{id}/print/qr", [App\Http\Controllers\BKDController::class, "generateQR"]);
 });
 
-Route::prefix("/lkd")->group(function() {
-    Route::get("/add", [App\Http\Controllers\LKDController::class, "addlkd"]);
+/** Penilaian BKD **/
+Route::prefix("/bkd/penilaian")->group(function () {
+    // List SKP punya anak buah dari Atasan nya
+    Route::get("/", [App\Http\Controllers\PenilaianBKDController::class, "listBKD"]);
+    // Detail BKD yang dinilai/realisasi
+    Route::get("/{id}/detail", [App\Http\Controllers\PenilaianBKDController::class, "realisasiForm"]);
+
+    // Simpan Nilai Tugas Jabatan
+    Route::post("/{id}/detail", [App\Http\Controllers\PenilaianBKDController::class, "simpanNilai"]);
 });
