@@ -147,27 +147,27 @@
                     <thead>
 
                         <tr>
-                            <th>Angka<br />Kredit</th>
-                            <th>Kuat/<br />Output</th>
-                            <th>Kual/<br />Mutu</th>
-                            <th>Waktu</th>
-                            <th>Biaya</th>
-                            <th>Angka<br />Kredit</th>
-                            <th>Kuat/<br />Output</th>
-                            <th>Kual/<br />Mutu</th>
-                            <th>Waktu</th>
-                            <th>Biaya</th>
+                            <th>NO</th>
+                            <th>Bidang</th>
+                            </th>
+                            <th>Jenis Kegiatan</th>
+                            <th>Bukti Penugasan</th>
+                            <th>SKS</th>
+
+                            <th>Masa Penugasan</th>
+                            <th>Bukti Dokumen</th>
+                            <th>SKS</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @for ($i = 0; $i<count($detail); $i++) <tr>
                             <td>{{ $i+1 }} </td>
-                            <td>{{ $detail[$i]->tugas_jabatan ?? "-" }}</td>
-                            <td>{{ $detail[$i]->angka_kredit }}</td>
-                            <td>{{ $detail[$i]->kuant_output ?? "-" }}</td>
-                            <td>{{ $detail[$i]->kual_mutu ?? "-" }}</td>
-                            <td>{{ $detail[$i]->waktu ?? "-" }}</td>
-                            <td>{{ $detail[$i]->biaya ?? "-" }}</td>
+                            <td>{{ $detail[$i]->Bidang ?? "-" }}</td>
+                            <td>{{ $detail[$i]->Jenis_Kegiatan }}</td>
+                            <td>{{ $detail[$i]->Bukti_Penugasan ?? "-" }}</td>
+                            <td>{{ $detail[$i]->SKS_RBKD ?? "-" }}</td>
+
                             <td>
                                 <input type="hidden" name="id[]" value="{{ $detail[$i]->id }}">
                                 <input type="text" class="form-control" name="angka_kredit[]" value="{{ old('angka_kredit['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->angka_kredit : "" }}" style="max-width:60px">
