@@ -20,18 +20,18 @@ class HeaderSKP extends Model
         'tanggal_awal' => 'date:Y-m-d',
         'tanggal_akhir' => 'date:Y-m-d',
         'tanggal_draft' => 'datetime'
-    ]; 
+    ];
 
     public function Pegawai() {
         return $this->hasOne("App\Models\Pegawai", "id", "id_pegawai");
-    }    
+    }
 
     public function Atasan() {
-        return $this->hasOneThrough("App\Models\Pegawai", "App\Models\HubunganPegawai", 
-            "id_bawahan", // ID di HubunganPegawai / Tabel Penengah 
-            "id", // ID di Tabel Pegawai 
-            "id_pegawai", // ID Di Class HeaderSKP / tabel ini 
-            "id_atasan" // ID join nya, di join hubunganPegawai dan Pegawai on pegawai.id = hubungan_pegawai.id_atasan 
+        return $this->hasOneThrough("App\Models\Pegawai", "App\Models\HubunganPegawai",
+            "id_bawahan", // ID di HubunganPegawai / Tabel Penengah
+            "id", // ID di Tabel Pegawai
+            "id_pegawai", // ID Di Class HeaderSKP / tabel ini
+            "id_atasan" // ID join nya, di join hubunganPegawai dan Pegawai on pegawai.id = hubungan_pegawai.id_atasan
         );
     }
 
@@ -41,7 +41,7 @@ class HeaderSKP extends Model
 
     public function getStatusString() {
         switch($this->status_skp) {
-            case 1: 
+            case 1:
                 return "Pengecekan";
                 break;
             case 2:
@@ -51,9 +51,9 @@ class HeaderSKP extends Model
                 return "Disahkan";
                 break;
             default :
-                if ($this->divalidasi_oleh != null) 
+                if ($this->divalidasi_oleh != null)
                     return "Rejected";
-                else 
+                else
                     return "Draft";
                 break;
         }
@@ -87,12 +87,12 @@ class HeaderSKP extends Model
             return "Tugas Jabatan Sudah Dinilai";
         else if ($status == 2)
             return "Tugas Jabatan dan Perilaku Sudah Dinilai";
-        else 
+        else
             return "Belum Dinilai";
     }
 
     public function getNilaiTugasTambahan() {
-        $jumlah = $this->Detail->count();
+        $jumlah = $this->TugasTambahan->count();
 
         if ($jumlah <= 3 AND $jumlah >=1)
             return 1;
@@ -100,8 +100,8 @@ class HeaderSKP extends Model
             return 2;
         else if ($jumlah > 6)
             return 3;
-        else 
+        else
             return 0;
-            
+
     }
 }
