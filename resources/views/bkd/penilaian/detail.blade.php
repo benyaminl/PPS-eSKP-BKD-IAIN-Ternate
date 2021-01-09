@@ -145,12 +145,7 @@
             <div class="table-responsive">
                 <table class="table responsive nowrap" style="width:100%" id="lkd">
                     <thead>
-                        <tr>
-                            <th rowspan=2>No</th>
-                            <th rowspan=2>LKD</th>
-                            <th colspan=5 class="text-center">Target</th>
-                            <th colspan=5 class="text-center">Realisasi</th>
-                        </tr>
+
                         <tr>
                             <th>Angka<br />Kredit</th>
                             <th>Kuat/<br />Output</th>
