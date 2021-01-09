@@ -96,7 +96,7 @@
                 {{-- Hanya tampilkan kalau BKD sudah validated --}}
                 @if ($header->status_bkd == 3 && $isValidasi == false)
                 <a href="{{ url('/bkd/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
-                    <i class="fas fa-print"></i> Print BKD
+                    <i class="fas fa-print"></i> Print RBKD
                 </a>
                 @endif
                 @if ($header->status_bkd == 0 && $isValidasi == false)
