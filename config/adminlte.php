@@ -295,13 +295,35 @@ return [
             'url'         => 'bkd/add',
             'icon'    => 'fas fa-fw fa-plus',
         ],
-
+        [
+            'text'        => 'Verifikasi RBKD',
+            'url'         => 'bkd/verifikasi',
+            'icon'        => 'fas fa-user-check',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Pengesahan RBKD',
+            'url'         => 'bkd/pengesahan',
+            'icon'        => 'fas fa-calendar-check',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Penilaian LKD',
+            'url'         => 'bkd/penilaian',
+            'icon'        => 'fas fa-poll',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
+
+
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',
