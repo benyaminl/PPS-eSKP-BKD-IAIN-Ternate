@@ -64,7 +64,10 @@ Route::prefix("/skp/penilaian")->group(function () {
     Route::get("/{id}/detail", [App\Http\Controllers\PenilaianSKPController::class, "realisasiForm"]);
 
     // Simpan Nilai Tugas Jabatan
-    Route::post("/{id}/detail", [App\Http\Controllers\PenilaianSKPController::class, "simpanNilai"]);
+    Route::post("/{id}/detail", [App\Http\Controllers\PenilaianSKPController::class, "simpanNilaiJabatan"]);
+    // Simpan Nilai Sikap 
+    Route::patch("/{id}/detail", [App\Http\Controllers\PenilaianSKPController::class, "simpanNilaiPerilaku"]);
+
 });
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DetailSKP;
 use App\Models\HeaderSKP;
 use App\Models\PenilaianSKP;
+use App\Models\PenilaianPerilakuKerja;
 use App\Models\TugasTambahan;
 use Carbon\Carbon as CarbonCarbon;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ class PenilaianSKPController extends Controller
         // Penilaian
         $nilaiTugasTambahan = $header->getNilaiTugasTambahan();
         $nilaiJabatan = PenilaianSKP::whereIdHeader($id)->orderBy("id_detail")->get();
+        $nilaiPerilaku = PenilaianPerilakuKerja::whereIdHeader($id)->first();
         $nama = Auth::user()->nama ?? "Benyamin";
         $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
         return \view("skp/penilaian/detail", [
@@ -50,12 +52,13 @@ class PenilaianSKPController extends Controller
             "nilaiJabatan" => $nilaiJabatan,
             "departemen" => $departemen,
             "nilaiTugasTambahan" => $nilaiTugasTambahan,
+            "nilaiPerilaku" => $nilaiPerilaku,
             "isValidasi" => $isValidasi,
             "isPengesahan" => $isPengesahan
         ]);
     }
 
-    public function simpanNilai($id, Request $request) {
+    public function simpanNilaiJabatan($id, Request $request) {
         $header = HeaderSKP::findOrFail($id);
         // dd($request->input("id"));
         for ($i = 0; $i < count($request->input("id")); $i++) {
@@ -72,6 +75,24 @@ class PenilaianSKPController extends Controller
             $nilai->biaya          = $request->input("biaya")[$i];
             $nilai->save();
         }
+
+        return redirect()->back()->with("success", "Nilai Jabatan sudah disimpan!");
+    }
+
+    public function simpanNilaiPerilaku($id, Request $request) {
+        $header = HeaderSKP::findOrFail($id);
+        // dd($request->all());
+        if (PenilaianPerilakuKerja::whereIdHeader($id)->count() <= 0)
+            $nilai = new PenilaianPerilakuKerja();
+        else 
+            $nilai = PenilaianPerilakuKerja::whereIdHeader($id)->first();
+        $nilai->id_header   = $id;
+        $nilai->pelayanan   = $request->input("pelayanan");
+        $nilai->intergritas = $request->input("intergritas");
+        $nilai->komitmen    = $request->input("komitmen");
+        $nilai->disiplin    = $request->input("disiplin");
+        $nilai->kerjasama   = $request->input("kerjasama");
+        $nilai->save();
 
         return redirect()->back()->with("success", "Nilai Jabatan sudah disimpan!");
     }

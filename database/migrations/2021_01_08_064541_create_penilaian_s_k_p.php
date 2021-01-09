@@ -32,7 +32,6 @@ class CreatePenilaianSKP extends Migration
         Schema::create('penilaian_perilaku_kerja', function (Blueprint $table) {
             $table->id();
             $table->integer("id_header");
-            $table->integer("id_detail");
             $table->integer("pelayanan");
             $table->integer("intergritas");
             $table->integer("komitmen");
