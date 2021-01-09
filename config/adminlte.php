@@ -295,6 +295,13 @@ return [
             'url'         => 'bkd/add',
             'icon'    => 'fas fa-fw fa-plus',
         ],
+        [
+            'text'        => 'Verifikasi RBKD',
+            'url'         => 'bkd/verifikasi',
+            'icon'        => 'fas fa-user-check',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
 
         ['header' => 'account_settings'],
         [
@@ -302,6 +309,8 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
+
+
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',
