@@ -1,17 +1,17 @@
 {{-- Example @url : https://github.com/jeroennoten/Laravel-AdminLTE/wiki/4.-Usage --}}
 @extends('adminlte::page')
 
-@section('title', 'Input SKP Pegawai | ESKP BKD IAIN TERNATE')
+@section('title', 'Input BKD | ESKP BKD IAIN TERNATE')
 
 @section('content_header')
-<h1>Input SKP</h1>
+<h1>Input BKD</h1>
 @stop
 
 @section('content')
 <div class="card">
     @include('alert')
     <div class="card-header">
-        Input SKP Pegawai PNS
+        Input BKD
     </div>
     <div class="card-body">
         <form method="POST">
@@ -21,10 +21,7 @@
                     <th>Nama Lengkap</th>
                     <td>{{ $nama }}</td>
                 </tr>
-                <tr>
-                    <th>Departemen</th>
-                    <td>{{ $departemen }}</td>
-                </tr>
+                <!-- saya hapus departemen disini karena error -->
             </table>
             <div class="row">
                 <div class="form-group col-6">
@@ -37,7 +34,7 @@
                 </div>
             </div>
             <button class="btn btn-success"><i class="fas fa-plus"></i> Tambah</button>
-            <a href="{{ url('/skp') }}" class="btn btn-danger"><i class="fas fa-backward"></i> Kembali</a>
+            <a href="{{ url('/bkd') }}" class="btn btn-danger"><i class="fas fa-backward"></i> Kembali</a>
         </form>
     </div>
 </div>

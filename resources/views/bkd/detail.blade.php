@@ -4,17 +4,17 @@
 {{-- Allow DataTable --}}
 @section('plugins.Datatables', true)
 
-@section('title', 'List SKP Pegawai | ESKP BKD IAIN TERNATE')
+@section('title', 'List BKD | ESKP BKD IAIN TERNATE')
 
 @section('content_header')
-<h1>Detail SKP IAIN Ternate</h1>
+<h1>Detail BKD IAIN Ternate</h1>
 @stop
 
 @section('content')
 <div class="card">
     @include('alert')
     <div class="card-header">
-        <h3 class="d-inline-block">Detail SKP</h3>
+        <h3 class="d-inline-block">Detail BKD</h3>
         <a href="{{ url()->previous() }}" class="btn btn-primary float-right">
             <i class="fas fa-backward"></i> Kembali
         </a>
@@ -33,8 +33,8 @@
                         <td>{{ $header->Pegawai->nama }}</td>
                     </tr>
                     <tr>
-                        <th>Unit Kerja</th>
-                        <td>{{ $header->Pegawai->biro }}</td>
+                        <th>Fakultas</th>
+                        <td>{{ $header->Pegawai->fak_dept }}</td>
                     </tr>
                     <tr>
                         <th>Pangkat/Golongan Ruang</th>
@@ -53,7 +53,7 @@
                         <td>{{ $header->tanggal_akhir }}</td>
                     </tr>
                     <tr>
-                        <th>Status SKP</th>
+                        <th>Status BKD</th>
                         <td>{{ $header->getStatusString() }}</td>
                     </tr>
                     @if ($header->getStatusString() == "Valid")
@@ -75,7 +75,7 @@
                         <td>{{ $header->Atasan->nama }}</td>
                     </tr>
                     <tr>
-                        <th>Unit Kerja</th>
+                        <th>Fakultas</th>
                         <td>{{ $header->Atasan->biro }}</td>
                     </tr>
                     <tr>
@@ -93,19 +93,17 @@
                 </table>
             </div>
             <div class="col-12 mb-3">
-                {{-- Hanya tampilkan kalau SKP sudah validated --}}
+                {{-- Hanya tampilkan kalau BKD sudah validated --}}
                 @if ($header->status_skp == 3 && $isValidasi == false)
-                <a href="{{ url('/skp/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
-                    <i class="fas fa-print"></i> Print SKP
+                <a href="{{ url('/bkd/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
+                    <i class="fas fa-print"></i> Print BKD
                 </a>
                 @endif
-                @if ($header->status_skp == 0 && $isValidasi == false)
-                <a href="{{ url('/skp/'.$header->id.'/detail/add') }}" class="btn btn-success float-right">
-                    <i class="fas fa-plus"></i> Tambah Tugas Jabatan
+                @if ($header->status_bkd == 0 && $isValidasi == false)
+                <a href="{{ url('/bkd/'.$header->id.'/detail/add') }}" class="btn btn-success float-right">
+                    <i class="fas fa-plus"></i> Tambah BKD
                 </a>
-                <a href="{{ url('/skp/'.$header->id.'/detail/add-tgstambahan') }}" class="btn btn-info mr-2 float-right">
-                    <i class="fas fa-plus"></i> Tambah Tugas Tambahan
-                </a>
+
 
                 <form method="POST" class="d-inline-block float-right mr-2">
                     @method("PUT")
@@ -114,7 +112,7 @@
                 </form>
                 @endif
                 {{-- Kalau untuk Validasi Maka --}}
-                @if ($isValidasi AND $header->status_skp == 1)
+                @if ($isValidasi AND $header->status_bkd == 1)
                 <form method="POST" class="d-inline-block float-right mr-2">
                     @method("PATCH")
                     @csrf
@@ -129,40 +127,38 @@
                 </form>
                 @endif
 
-                @if ($isPengesahan AND $header->status_skp == 2)
+                @if ($isPengesahan AND $header->status_bkd == 2)
                 {{-- Kalau Pengesahan --}}
                 <form method="POST" class="d-inline-block float-right mr-2">
                     @method("POST")
                     @csrf
                     <input type="hidden" name='type' value='lengkap'>
-                    <button type="submit" class="btn btn-success">Sah kan SKP</button>
+                    <button type="submit" class="btn btn-success">Sah kan BKD</button>
                 </form>
                 @endif
             </div>
         </div>
 
-        <h3>Tugas Jabatan</h3>
+        <h3>RBKD</h3>
         <div class="table-responsive">
             <table class="table responsive nowrap" style="width:100%" id="tugasJabatan">
                 <thead>
                     <th>No</th>
-                    <th>Tugas Jabatan</th>
-                    <th>Angka Kredit</th>
-                    <th>Kuat/Output</th>
-                    <th>Kual/Mutu</th>
-                    <th>Waktu</th>
-                    <th>Biaya</th>
+                    <th>Bidang</th>
+                    <th>Jenis_Kegiatan</th>
+                    <th>Bukti_Penugasan</th>
+                    <th>SKS/th>
+
                     <th class="action">Action</th>
                 </thead>
                 <tbody>
                     @for ($i = 0; $i<count($detail); $i++) <tr>
                         <td>{{ $i+1 }} </td>
-                        <td>{{ $detail[$i]->tugas_jabatan ?? "-" }}</td>
-                        <td>{{ $detail[$i]->angka_kredit }}</td>
-                        <td>{{ $detail[$i]->kuant_output ?? "-" }}</td>
-                        <td>{{ $detail[$i]->kual_mutu ?? "-" }}</td>
-                        <td>{{ $detail[$i]->waktu ?? "-" }}</td>
-                        <td>{{ $detail[$i]->biaya ?? "-" }}</td>
+                        <td>{{ $detail[$i]->Bidang ?? "-" }}</td>
+                        <td>{{ $detail[$i]->Jenis_Kegiatan }}</td>
+                        <td>{{ $detail[$i]->Bukti_Penugasan ?? "-" }}</td>
+                        <td>{{ $detail[$i]->SKS_RBKD ?? "-" }}</td>
+
                         <td>
                             <form method="POST">
                                 {{-- Method Spoff --}}
@@ -178,36 +174,9 @@
             </table>
         </div>
         <br />
-        <h3>Tugas Tambahan</h3>
-        <div class="table-responsive">
-            <table class="table responsive nowrap" style="width:100%" id="tugasTambahan">
-                <thead>
-                    <th>No</th>
-                    <th>Deskripsi Tugas Tambahan</th>
-                    <th>Nomor SK</th>
-                    <th class="action">Action</th>
-                </thead>
-                <tbody>
-                    @for ($i = 0; $i<count($detailTambahan); $i++) <tr>
-                        <td>{{ $i+1 }} </td>
-                        <td>{{ $detailTambahan[$i]->tugas_tambahan ?? "-" }}</td>
-                        <td>{{ $detailTambahan[$i]->nomor_sk ?? "-" }}</td>
-                        <td>
-                            <form method="POST">
-                                {{-- Method Spoff --}}
-                                @method("DELETE")
-                                @csrf
-                                <input type="hidden" value='{{ $detailTambahan[$i]->id }}' name='id'>
-                                <input type="hidden" value='tugas-tambahan' name='type'>
-                                <button class="btn btn-danger" type=submit><i class="fa fa-trash"></i></button>
-                            </form>
-                        </td>
-                        </tr>
-                        @endfor
-                </tbody>
-            </table>
-        </div>
+
     </div>
+</div>
 </div>
 @stop
 
@@ -216,6 +185,6 @@
 @stop --}}
 @section('js')
 <script>
-    $("#tugasTambahan,#tugasJabatan").DataTable();
+    $("#Bidang").DataTable();
 </script>
 @stop

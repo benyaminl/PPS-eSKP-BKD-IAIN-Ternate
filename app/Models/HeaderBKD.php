@@ -12,7 +12,7 @@ class HeaderBKD extends Model
     # const CREATED_AT = 'insert_date';
     # const UPDATED_AT = 'update_date';
     protected $primaryKey = 'id';
-    protected $table = 'header_skp';
+    protected $table = 'header_bkd';
     protected $casts = [
         'tanggal_validasi' => 'datetime',
         'tanggal_pengajuan' => 'datetime',
@@ -22,12 +22,16 @@ class HeaderBKD extends Model
         'tanggal_draft' => 'datetime'
     ];
 
-    public function Pegawai() {
+    public function Pegawai()
+    {
         return $this->hasOne("App\Models\Pegawai", "id", "id_pegawai");
     }
 
-    public function Atasan() {
-        return $this->hasOneThrough("App\Models\Pegawai", "App\Models\HubunganPegawai",
+    public function Atasan()
+    {
+        return $this->hasOneThrough(
+            "App\Models\Pegawai",
+            "App\Models\HubunganPegawai",
             "id_bawahan", // ID di HubunganPegawai / Tabel Penengah
             "id", // ID di Tabel Pegawai
             "id_pegawai", // ID Di Class HeaderSKP / tabel ini
@@ -35,12 +39,14 @@ class HeaderBKD extends Model
         );
     }
 
-    public function Validator() {
+    public function Validator()
+    {
         return $this->hasOne("App\Models\Pegawai", "id", "divalidasi_oleh");
     }
 
-    public function getStatusString() {
-        switch($this->status_skp) {
+    public function getStatusString()
+    {
+        switch ($this->status_bkd) {
             case 1:
                 return "Pengecekan";
                 break;
@@ -50,7 +56,7 @@ class HeaderBKD extends Model
             case 3:
                 return "Disahkan";
                 break;
-            default :
+            default:
                 if ($this->divalidasi_oleh != null)
                     return "Rejected";
                 else
@@ -59,16 +65,15 @@ class HeaderBKD extends Model
         }
     }
 
-    public function Detail() {
-        return $this->hasMany("App\Models\DetailSKP", "id_header", "id");
+    public function Detail()
+    {
+        return $this->hasMany("App\Models\DetailBKD", "id_header", "id");
     }
 
-    public function TugasTambahan() {
-        return $this->hasMany("App\Models\TugasTambahan", "id_header", "id");
-    }
 
-    public function getStatusPenilaian() {
-        $jumlah = PenilaianSKP::whereIdHeader($this->id)->count();
+    public function getStatusPenilaian()
+    {
+        $jumlah = PenilaianBKD::whereIdHeader($this->id)->count();
         return $jumlah > 0;
     }
 
@@ -76,22 +81,11 @@ class HeaderBKD extends Model
      * Fungsi untuk mengembalikan status penilaian dalam string
      * @return string
      */
-    public function getStatusPenilaianString() {
+    public function getStatusPenilaianString()
+    {
         if ($this->getStatusPenilaian())
             return "Tugas Jabatan Sudah Dinilai";
         else
             return "Belum Dinilai";
-    }
-
-    public function getNilaiTugasTambahan() {
-        $jumlah = $this->Detail->count();
-
-        if ($jumlah <= 3)
-            return 1;
-        else if ($jumlah >=4 AND $jumlah <= 6)
-            return 2;
-        else
-            return 3;
-
     }
 }

@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Auth;
 
 class SKPController extends Controller
 {
-    public function list(Request $request) {
-        $start = $request->input("tanggal-start") ?? date("Y")."-01-01";
-        $end   = $request->input("tanggal-end") ?? date("Y")."-12-31";
+    public function list(Request $request)
+    {
+        $start = $request->input("tanggal-start") ?? date("Y") . "-01-01";
+        $end   = $request->input("tanggal-end") ?? date("Y") . "-12-31";
         $data  = HeaderSKP::where("tanggal_awal", ">=", $start)->where("tanggal_akhir", "<=", $end)->get();
 
         return \view("skp/index", [
@@ -26,11 +27,12 @@ class SKPController extends Controller
         ]);
     }
 
-    public function addHeaderForm() {
+    public function addHeaderForm()
+    {
         $nama = Auth::user()->nama ?? "Benyamin";
         $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
-        $start = date("Y")."-01-01";
-        $end   = date("Y")."-12-31";
+        $start = date("Y") . "-01-01";
+        $end   = date("Y") . "-12-31";
         return \view("skp/add", [
             "nama" => $nama,
             "departemen" => $departemen,
@@ -39,7 +41,8 @@ class SKPController extends Controller
         ]);
     }
 
-    public function add(Request $request) {
+    public function add(Request $request)
+    {
         $valid = $request->validate([
             "tanggal-mulai" => "required|date_format:Y-m-d",
             "tanggal-selesai" => "required|date_format:Y-m-d"
@@ -51,12 +54,13 @@ class SKPController extends Controller
         $header->tanggal_awal = $valid["tanggal-mulai"];
         $header->tanggal_akhir = $valid["tanggal-selesai"];
         if ($header->save())
-            return redirect("/skp/".$header->id."/detail")->with("success", "Berhasil membuat SKP Baru");
-        else 
+            return redirect("/skp/" . $header->id . "/detail")->with("success", "Berhasil membuat SKP Baru");
+        else
             return redirect()->back()->with("error", "Gagal membuat SKP Baru");
     }
 
-    public function detailForm($id) {
+    public function detailForm($id)
+    {
         $header = HeaderSKP::find($id);
         $detail = $header->detail;
         $detailTambahan = $header->TugasTambahan;
@@ -76,11 +80,13 @@ class SKPController extends Controller
         ]);
     }
 
-    public function addDetailForm($id) {
+    public function addDetailForm($id)
+    {
         $header = HeaderSKP::findOrFail($id);
         $nama = Auth::user()->nama ?? "Benyamin";
         $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
-        $start = $header->tanggal_awal; $end = $header->tanggal_akhir;
+        $start = $header->tanggal_awal;
+        $end = $header->tanggal_akhir;
         return \view("skp/detail-add", [
             "header" => $header,
             "nama" => $nama,
@@ -90,7 +96,8 @@ class SKPController extends Controller
         ]);
     }
 
-    public function addDetailTambahanForm($id) {
+    public function addDetailTambahanForm($id)
+    {
         $header = HeaderSKP::findOrFail($id);
         $nama = Auth::user()->nama ?? "Benyamin";
         $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
@@ -101,7 +108,8 @@ class SKPController extends Controller
         ]);
     }
 
-    public function addDetail($id, Request $request) {
+    public function addDetail($id, Request $request)
+    {
         $valid = $request->validate([
             'tugas_jabatan' => 'required',
             'angka_kredit' => 'integer|required',
@@ -112,38 +120,40 @@ class SKPController extends Controller
             'output' => 'required',
             'biaya' => 'integer|required',
         ]);
-        
+
         $detail = new DetailSKP();
         $detail->id_header      = $id;
         $detail->tugas_jabatan  = $valid["tugas_jabatan"];
         $detail->angka_kredit   = $valid["angka_kredit"];
         $detail->kual_mutu      = $valid["kual_mutu"];
-        $detail->waktu          = $valid["waktu"]."/".$valid["satuan"];
-        $detail->kuant_output   = $valid["kuant"]."/".$valid["output"];
+        $detail->waktu          = $valid["waktu"] . "/" . $valid["satuan"];
+        $detail->kuant_output   = $valid["kuant"] . "/" . $valid["output"];
         $detail->biaya          = $valid["biaya"];
         $detail->save();
 
         return redirect()->back()->with("success", "Berhasil menambah SKP baru");
     }
 
-    public function addDetailTambahan($id, Request $request) {
+    public function addDetailTambahan($id, Request $request)
+    {
         $valid = $request->validate([
             'tugas-tambahan' => 'required',
             'sk' => 'required',
         ]);
-        
+
         $detail = new TugasTambahan();
         $detail->id_header       = $id;
         $detail->tugas_tambahan  = $valid["tugas-tambahan"];
         $detail->nomor_sk        = $valid["sk"];
         $detail->save();
-    
-        return redirect()->back()->with("success", "Berhasil tambah tugas tambahan!");
-    } 
 
-    public function deleteDetail(Request $request) {
+        return redirect()->back()->with("success", "Berhasil tambah tugas tambahan!");
+    }
+
+    public function deleteDetail(Request $request)
+    {
         $valid = $request->validate(["id" => "required"]);
-        $text = ""; 
+        $text = "";
         if ($request->input("type") == "tugas-tambahan") {
             $detail = TugasTambahan::find($valid["id"]);
             $detail->delete();
@@ -157,9 +167,10 @@ class SKPController extends Controller
         return redirect()->back()->with(["success" => "Berhasil hapus detail SKP $text"]);
     }
 
-    public function listValidasiSKP(Request $request) {
-        $start = $request->input("tanggal-start") ?? date("Y")."-01-01";
-        $end   = $request->input("tanggal-end") ?? date("Y")."-12-31";
+    public function listValidasiSKP(Request $request)
+    {
+        $start = $request->input("tanggal-start") ?? date("Y") . "-01-01";
+        $end   = $request->input("tanggal-end") ?? date("Y") . "-12-31";
         $data  = HeaderSKP::whereStatusSkp(1)->where("tanggal_awal", ">=", $start)->where("tanggal_akhir", "<=", $end)->get();
 
 
@@ -170,9 +181,10 @@ class SKPController extends Controller
         ]);
     }
 
-    public function listPengesahanSKP(Request $request) {
-        $start = $request->input("tanggal-start") ?? date("Y")."-01-01";
-        $end   = $request->input("tanggal-end") ?? date("Y")."-12-31";
+    public function listPengesahanSKP(Request $request)
+    {
+        $start = $request->input("tanggal-start") ?? date("Y") . "-01-01";
+        $end   = $request->input("tanggal-end") ?? date("Y") . "-12-31";
         $data  = HeaderSKP::whereStatusSkp(2)
             ->where("tanggal_awal", ">=", $start)
             ->where("tanggal_akhir", "<=", $end)
@@ -188,7 +200,8 @@ class SKPController extends Controller
     }
 
 
-    public function ajukanValidasi($id) {
+    public function ajukanValidasi($id)
+    {
         $header = HeaderSKP::find($id);
 
         $header->status_skp = 1;
@@ -200,7 +213,8 @@ class SKPController extends Controller
         return redirect()->back()->with("success", "Berhasil ajukan untuk di validasi!");
     }
 
-    public function validasiSKP($id, Request $request) {
+    public function validasiSKP($id, Request $request)
+    {
         $header = HeaderSKP::find($id);
 
         $header->status_skp = 2;
@@ -211,7 +225,8 @@ class SKPController extends Controller
         return redirect()->back()->with("success", "Berhasil divalidasi!");
     }
 
-    public function rejectSKP($id, Request $request) {
+    public function rejectSKP($id, Request $request)
+    {
         $header = HeaderSKP::find($id);
 
         $header->status_skp = 0;
@@ -219,10 +234,11 @@ class SKPController extends Controller
         $header->tanggal_validasi = Carbon::now();
         $header->save();
 
-        return redirect()->back()->with("success", "Status Kembali menjadi Draf!");       
+        return redirect()->back()->with("success", "Status Kembali menjadi Draf!");
     }
 
-    public function pengesahanSKP($id, Request $request) {
+    public function pengesahanSKP($id, Request $request)
+    {
         $header = HeaderSKP::find($id);
 
         $header->status_skp = 3;
@@ -230,10 +246,11 @@ class SKPController extends Controller
         $header->tanggal_pengesahan = Carbon::now();
         $header->save();
 
-        return redirect()->back()->with("success", "Anda berhasil mengesahkan SKP! Sekarang bawahan anda dapat melakukan print terhadap formulir SKP.");       
+        return redirect()->back()->with("success", "Anda berhasil mengesahkan SKP! Sekarang bawahan anda dapat melakukan print terhadap formulir SKP.");
     }
 
-    public function printSKP($id) {
+    public function printSKP($id)
+    {
         $data = HeaderSKP::find($id);
         $detail = $data->detail;
         return \view("skp/print", [
@@ -244,24 +261,25 @@ class SKPController extends Controller
     }
 
 
-    public function generateQR($id) {
+    public function generateQR($id)
+    {
         $header = HeaderSKP::find($id);
         // GENERATE QR CODE
-        $qr = new QrCode("https://skp.iain-ternate.ac.id/verify?=".$id);
+        $qr = new QrCode("https://skp.iain-ternate.ac.id/verify?=" . $id);
         $qr->setSize(150);
         // dd(public_path("/vendor/iain/logo.png"));
         // Adding Logo
         $qr->setLogoPath(public_path("/vendor/iain/logo.png"));
         $qr->setLogoSize(80, 80);
         // Adding Label
-        $qr->setLabel('Sudah Disahkan oleh '.$header->Atasan->nama, 8, public_path("/vendor/iain/calibrib.ttf"), LabelAlignment::CENTER());
+        $qr->setLabel('Sudah Disahkan oleh ' . $header->Atasan->nama, 8, public_path("/vendor/iain/calibrib.ttf"), LabelAlignment::CENTER());
         // OUTPUT QR CODE
         // DIRECTLY OUTPUT AS IMAGE
         // <img src="1-simple-qr.php"/>
         // header("Content-Type: {$qr->getContentType()}");
         // @see https://laravel.com/docs/8.x/responses#response-objects
         return response($qr->writeString())
-                ->header("Content-Disposition", 'filename="qr-'.$id.'.png"')
-                ->header("Content-Type", $qr->getContentType());
+            ->header("Content-Disposition", 'filename="qr-' . $id . '.png"')
+            ->header("Content-Type", $qr->getContentType());
     }
 }

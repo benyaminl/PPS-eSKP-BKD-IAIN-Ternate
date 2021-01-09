@@ -181,44 +181,6 @@
             </tbody>
         </table>
         </div>
-        <h3 class="mt-5">Penilaian Sikap Kerja</h3>
-        <form method="POST">
-            @method("PATCH")
-            @csrf
-            <div class="form-group row">
-                <label class="col-4">Orientasi Pelayanan</label>
-                <input type="number" name="pelayanan" min=0 max=100 class="form-control hitung col-8">
-            </div>
-            <div class="form-group row">
-                <label class="col-4">Intergritas</label>
-                <input type="number" name="intergritas" min=0 max=100 class="form-control hitung col-8">
-            </div>
-            <div class="form-group row">
-                <label class="col-4">Komitmen</label>
-                <input type="number" name="komitmen" min=0 max=100 class="form-control hitung col-8">
-            </div>
-            <div class="form-group row">
-                <label class="col-4">Disiplin</label>
-                <input type="number" name="disiplin" min=0 max=100 class="form-control hitung col-8">
-            </div>
-            <div class="form-group row">
-                <label class="col-4">Kerjasama</label>
-                <input type="number" name="kerjasama" min=0 max=100 class="form-control hitung col-8">
-            </div>
-            <div class="form-group row">
-                <label class="col-4">Kepemimpinan</label>
-                <input type="number" name="kepemimpinan" min=0 max=100 class="form-control hitung col-8">
-            </div>
-            <div class="form-group row">
-                <label class="col-4">Jumlah</label>
-                <input type="number" disabled name="jumlah" min=0 max=100 class="form-control col-8">
-            </div>
-            <div class="form-group row">
-                <label class="col-4">Rata-Rata</label>
-                <input type="number" disabled name="rataan" min=0 max=100 class="form-control col-8">
-            </div>
-            <button type="submit" class="btn btn-primary float-right mt-2">Simpan Nilai Sikap</button>
-        </form>
     </div>
 </div>
 @stop
@@ -229,22 +191,5 @@
 @section('js')
 <script>
 $("#tugasTambahan,#tugasJabatan").DataTable();
-$(function() {
-    function calculate() {
-        var data = $(".hitung");
-        var total = 0;
-        for(var i = 0; i< data.length; i++) {
-            if (!isNaN(parseInt($(data[i]).val())))
-                total += parseInt($(data[i]).val()); 
-        }
-        console.log(total);
-        console.log(total/6);
-        // set jumlah
-        $("input[name='jumlah']").val(total);
-        // set rata-rata
-        $("input[name='rataan']").val((total/6).toFixed(2));
-    }
-    $(".hitung").change(calculate);
-});
 </script>
 @stop

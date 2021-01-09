@@ -4,10 +4,10 @@
 {{-- Allow DataTable --}}
 @section('plugins.Datatables', true)
 
-@section('title', 'List SKP Pegawai | ESKP BKD IAIN TERNATE')
+@section('title', 'List RBKD | ESKP BKD IAIN TERNATE')
 
 @section('content_header')
-<h1>SKP IAIN Ternate</h1>
+<h1>BKD IAIN Ternate</h1>
 @stop
 
 @section('content')
@@ -27,7 +27,7 @@
                 <button type="submit" class="btn btn-primary">Filter</button>
             </div>
         </form>
-        <a href="{{ url('/skp/add') }}" class="btn btn-success float-right">
+        <a href="{{ url('/bkd/add') }}" class="btn btn-success float-right">
             <i class="fas fa-plus"></i> Add
         </a>
         </form>
@@ -52,7 +52,7 @@
                     <td>{{ $d->getStatusString() }}</td>
                     <td>{{ $d->Pegawai->biro }}</td>
                     <td>
-                        <a href="{{ url("skp/".$d->id."/detail") }}" class="btn btn-primary">Detail</a>
+                        <a href="{{ url("bkd/".$d->id."/detail") }}" class="btn btn-primary">Detail</a>
                     </td>
                 </tr>
                 @endforeach
