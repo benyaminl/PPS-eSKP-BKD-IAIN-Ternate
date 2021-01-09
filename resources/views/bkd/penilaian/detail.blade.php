@@ -170,14 +170,14 @@
                             <td>{{ $detail[$i]->SKS_RBKD ?? "-"}}</td>
 
                             <td>
-                                <input type="text" class="form-control" name="Masa_Penugasan[]" value="{{ old('Masa_Penugasan['.$i.']') }}" style="max-width:300px">
+                                <input type="hidden" name="id[]" value="{{ $detail[$i]->id }}">
+                                <input type="text" class="form-control" name="Masa_Penugasan[]" value="{{ old('Masa_Penugasan['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->Masa_Penugasan : "" }}" style="max-width:300px">
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="Bukti_Dokumen[]" value="{{ old('Bukti_Dokumen['.$i.']') }}" style="max-width:300px">
-
+                                <input type="text" class="form-control" name="Bukti_Dokumen[]" value="{{ old('Bukti_Dokumen['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->Masa_Penugasan : "" }}" style="max-width:300px">
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="SKS_LKD[]" value="{{ old('SKS_LKD['.$i.']') }}" style="max-width:60px">
+                                <input type="text" class="form-control" name="SKS_LKD[]" value="{{ old('SKS_LKD['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->SKS_LKD : "" }}" style="max-width:60px">
                             </td>
 
                             </tr>
