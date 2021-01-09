@@ -100,18 +100,18 @@ class BKDController extends Controller
     public function addDetail($id, Request $request)
     {
         $valid = $request->validate([
-            'bidang' => 'required',
-            'jenis_kegiatan' => 'required',
-            'bukti_penugasan' => 'required',
+            'Bidang' => 'required',
+            'Jenis_Kegiatan' => 'required',
+            'Bukti_Penugasan' => 'required',
             'SKS_RBKD' => 'required',
         ]);
 
         $detail = new DetailBKD();
         $detail->id_header      = $id;
-        $detail->bidang  = $valid["bidang"];
-        $detail->jenis_kegiatan   = $valid["jenis_kegiatan"];
-        $detail->bukti_penugasan      = $valid["bukti_penugasan"];
-        $detail->SKS_RBKD          = $valid["waktu"];
+        $detail->bidang  = $valid["Bidang"];
+        $detail->jenis_kegiatan   = $valid["Jenis_Kegiatan"];
+        $detail->bukti_penugasan      = $valid["Bukti_Penugasan"];
+        $detail->SKS_RBKD          = $valid["SKS_RBKD"];
         $detail->save();
 
         return redirect()->back()->with("success", "Berhasil menambah RBKD baru");
