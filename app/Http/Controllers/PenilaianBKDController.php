@@ -68,8 +68,8 @@ class PenilaianBKDController extends Controller
                 $nilai = PenilaianBKD::whereIdDetail($request->input("id")[$i])->first();
             $nilai->id_header      = $id;
             $nilai->id_detail      = $request->input("id")[$i];
-            $nilai->angka_kredit   = $request->input("masa_penugasan")[$i];
-            $nilai->kual_mutu      = $request->input("bukti_dokumen")[$i];
+            $nilai->angka_kredit   = $request->input("Masa_Penugasan")[$i];
+            $nilai->kual_mutu      = $request->input("Bukti_Dokumen")[$i];
             $nilai->waktu          = $request->input("SKS_LKD")[$i];
 
             $nilai->save();

@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Auth;
 
 class BKDController extends Controller
 {
+    public function index()
+    {
+        $pegawai = \App\Models\Pegawai::all();
+        return view('bkd.index', ['pegawai' => $pegawai]);
+    }
     public function list(Request $request)
     {
         $start = $request->input("tanggal-start") ?? date("Y") . "-01-01";
@@ -29,12 +34,12 @@ class BKDController extends Controller
     public function addHeaderForm()
     {
         $nama = Auth::user()->nama ?? "Benyamin";
-        $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
+        $fak_dept = Auth::user()->fak_dept ?? "Tarbiyah";
         $start = date("Y") . "-01-01";
         $end   = date("Y") . "-12-31";
         return \view("bkd/add", [
             "nama" => $nama,
-            "departemen" => $departemen,
+            "fak_dept" => $fak_dept,
             "start" => $start,
             "end" => $end
         ]);
