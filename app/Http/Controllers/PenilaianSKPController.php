@@ -21,6 +21,7 @@ class PenilaianSKPController extends Controller
         $end   = $request->input("tanggal-end") ?? date("Y")."-12-31";
         $data  = HeaderSKP::where("tanggal_awal", ">=", $start)->where("tanggal_akhir", "<=", $end)
                  ->whereRaw("header_skp.id_pegawai in (select id_bawahan from hubungan_pegawai where id_atasan = ?)", [Auth::id() ?? "2"])
+                 ->where("status_skp", ">", "2")
                  // ->toSql();
                  ->get();
 

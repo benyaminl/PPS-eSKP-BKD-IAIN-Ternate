@@ -97,7 +97,7 @@ Route::prefix("/bkd")->group(function () {
     // Reject BKD
     Route::delete("/verifikasi/{id}/detail", [App\Http\Controllers\BKDController::class, "rejectBKD"]);
     // Pengesahan
-    Route::post("/pengesahan/{id}/detail", [App\Http\Controllers\SKPController::class, "pengesahanBKD"]);
+    Route::post("/pengesahan/{id}/detail", [App\Http\Controllers\BKDController::class, "pengesahanBKD"]);
 
     // Print Halaman
     Route::get("/{id}/print", [App\Http\Controllers\BKDController::class, "printBKD"]);
