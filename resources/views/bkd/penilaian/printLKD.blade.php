@@ -59,7 +59,7 @@
         <img class="img-fluid" src="{{ url('/vendor/iain/logo.png') }}">
     </div>
     <div class="kop text-center">
-        <h2>KEMENTRIAN AGAMA REPUBLIK INDONESIA</h2>
+        <h2>KEMENTERIAN AGAMA REPUBLIK INDONESIA</h2>
         <h4>INSTITUT AGAMA ISLAM NEGERI TERNATE</h4>
         <p>Jalan Lumba-lumba Kelurahan Dufa-dufa Ternate 97727<br />Telepon: (0921) 3121426 Faximile: (0921) 3123773<br />Website: www.iain-ternate.ac.id</p>
     </div>
@@ -124,15 +124,12 @@
             <th rowspan=2>NO</th>
             <th rowspan=2>Kegiatan</th>
             <th colspan=2>Beban Kerja</th>
-            <th colspan=2>Masa Pelaksanaan Tugas</th>
+            <th rowspan=2>Masa Pelaksanaan Tugas</th>
             <th colspan=2>Kinerja</th>
-            <th colspan=2>Penilaian</th>
-
         </tr>
         <tr>
             <th>Bukti Penugasan</th>
             <th>SKS</th>
-            <th> </th>
             <th>Bukti Dokumen</th>
             <th>SKS</th>
         </tr>
