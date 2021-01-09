@@ -99,7 +99,7 @@ Route::prefix("/bkd")->group(function () {
     Route::post("/pengesahan/{id}/detail", [App\Http\Controllers\BKDController::class, "pengesahanBKD"]);
 
     // Print Halaman
-    Route::get("/{id}/print", [App\Http\Controllers\BKDController::class, "printBKD"]);
+    Route::get("/{id}/print", [App\Http\Controllers\BKDController::class, "printRBKD"]);
     // Ini URL untuk QR Code
     Route::get("/{id}/print/qr", [App\Http\Controllers\BKDController::class, "generateQR"]);
 });
