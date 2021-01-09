@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <label>Bidang</label>
-                    <select class="form-control mt-1" name="bidang" value="{{old('bidang')}}" class="form-control">
+                    <select class="form-control mt-1" name="Bidang" value="{{old('Bidang')}}" class="form-control">
                         <option value=0>Silahkan pilih Bidang</option>
                         <option>Kinerja Bidang Pendidikan</option>
                         <option>Kinerja Bidang Penelitian</option>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-12 col-md-1">
                     <label> SKS</label>
-                    <input type="number" min="0" name="output" value="{{ old('SKS_RBKD') }}" class="form-control mt-1">
+                    <input type="number" min="0" name="SKS_RBKD" value="{{ old('SKS_RBKD') }}" class="form-control mt-1">
                 </div>
 
             </div>

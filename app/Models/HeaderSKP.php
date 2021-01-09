@@ -17,8 +17,8 @@ class HeaderSKP extends Model
         'tanggal_validasi' => 'datetime',
         'tanggal_pengajuan' => 'datetime',
         'tanggal_pengesahan' => 'datetime',
-        'tanggal_awal' => 'datetime',
-        'tanggal_akhir' => 'datetime',
+        'tanggal_awal' => 'date:Y-m-d',
+        'tanggal_akhir' => 'date:Y-m-d',
         'tanggal_draft' => 'datetime'
     ]; 
 

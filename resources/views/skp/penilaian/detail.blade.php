@@ -187,27 +187,27 @@
             @csrf
             <div class="form-group row">
                 <label class="col-4">Orientasi Pelayanan</label>
-                <input type="number" name="pelayanan" min=0 max=100 class="form-control hitung col-8">
+                <input type="number" name="pelayanan" min=0 max=100 value="{{ old('pelayanan') ?? $nilaiPerilaku->pelayanan ?? "" }}" class="form-control hitung col-8">
             </div>
             <div class="form-group row">
                 <label class="col-4">Intergritas</label>
-                <input type="number" name="intergritas" min=0 max=100 class="form-control hitung col-8">
+                <input type="number" name="intergritas" min=0 max=100 value="{{ old('pelayanan') ?? $nilaiPerilaku->pelayanan ?? "" }}" class="form-control hitung col-8">
             </div>
             <div class="form-group row">
                 <label class="col-4">Komitmen</label>
-                <input type="number" name="komitmen" min=0 max=100 class="form-control hitung col-8">
+                <input type="number" name="komitmen" min=0 max=100 value="{{ old('pelayanan') ?? $nilaiPerilaku->pelayanan ?? "" }}" class="form-control hitung col-8">
             </div>
             <div class="form-group row">
                 <label class="col-4">Disiplin</label>
-                <input type="number" name="disiplin" min=0 max=100 class="form-control hitung col-8">
+                <input type="number" name="disiplin" min=0 max=100 value="{{ old('pelayanan') ?? $nilaiPerilaku->pelayanan ?? "" }}" class="form-control hitung col-8">
             </div>
             <div class="form-group row">
                 <label class="col-4">Kerjasama</label>
-                <input type="number" name="kerjasama" min=0 max=100 class="form-control hitung col-8">
+                <input type="number" name="kerjasama" min=0 max=100 value="{{ old('pelayanan') ?? $nilaiPerilaku->pelayanan ?? "" }}" class="form-control hitung col-8">
             </div>
             <div class="form-group row">
                 <label class="col-4">Kepemimpinan</label>
-                <input type="number" name="kepemimpinan" min=0 max=100 class="form-control hitung col-8">
+                <input type="number" name="kepemimpinan" min=0 max=100 value="{{ old('pelayanan') ?? $nilaiPerilaku->pelayanan ?? "" }}" class="form-control hitung col-8">
             </div>
             <div class="form-group row">
                 <label class="col-4">Jumlah</label>
@@ -244,7 +244,9 @@ $(function() {
         // set rata-rata
         $("input[name='rataan']").val((total/6).toFixed(2));
     }
+    calculate();
     $(".hitung").change(calculate);
+    $(".hitung").keypress(calculate);
 });
 </script>
 @stop

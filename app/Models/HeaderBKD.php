@@ -17,8 +17,8 @@ class HeaderBKD extends Model
         'tanggal_validasi' => 'datetime',
         'tanggal_pengajuan' => 'datetime',
         'tanggal_pengesahan' => 'datetime',
-        'tanggal_awal' => 'datetime',
-        'tanggal_akhir' => 'datetime',
+        'tanggal_awal' => 'date',
+        'tanggal_akhir' => 'date',
         'tanggal_draft' => 'datetime'
     ];
 
