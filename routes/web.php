@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -110,7 +111,6 @@ Route::prefix("/bkd/penilaian")->group(function () {
     Route::get("/", [App\Http\Controllers\PenilaianBKDController::class, "listBKD"]);
     // Detail BKD yang dinilai/realisasi
     Route::get("/{id}/detail", [App\Http\Controllers\PenilaianBKDController::class, "realisasiForm"]);
-
     // Simpan Nilai Tugas Jabatan
     Route::post("/{id}/detail", [App\Http\Controllers\PenilaianBKDController::class, "simpanNilai"]);
     // Print Halaman LKD

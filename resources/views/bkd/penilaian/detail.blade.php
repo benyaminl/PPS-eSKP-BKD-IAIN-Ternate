@@ -95,12 +95,12 @@
             <div class="col-12 mb-3">
                 {{-- Hanya tampilkan kalau LKD sudah validated --}}
                 @if ($header->status_bkd == 3 && $isValidasi == false)
-                <a href="{{ url('/bkd/penilaian'.$header->id.'/print') }}" class="btn btn-secondary float-right">
+                <a href="{{ url('/bkd/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
                     <i class="fas fa-print"></i> Print LKD
                 </a>
                 @endif
                 @if ($header->status_bkd == 0 && $isValidasi == false)
-                <a href="{{ url('/lkd/'.$header->id.'/detail/add') }}" class="btn btn-success float-right">
+                <a href="{{ url('/bkd/'.$header->id.'/detail/add') }}" class="btn btn-success float-right">
                     <i class="fas fa-plus"></i> Tambah LKD
                 </a>
 
@@ -163,10 +163,10 @@
                     <tbody>
                         @for ($i = 0; $i<count($detail); $i++) <tr>
                             <td>{{ $i+1 }} </td>
-                            <td>{{ $detail[$i]->Bidang }}</td>
+                            <td>{{ $detail[$i]->Bidang ?? "-" }}</td>
                             <td>{{ $detail[$i]->Jenis_Kegiatan }}</td>
                             <td>{{ $detail[$i]->Bukti_Penugasan }}</td>
-                            <td>{{ $detail[$i]->SKS_RBKD }}</td>
+                            <td>{{ $detail[$i]->SKS_RBKD ?? "-"}}</td>
 
                             <td>
                                 <input type="text" class="form-control" name="Masa_Penugasan[]" value="{{ old('Masa_Penugasan['.$i.']') }}" style="max-width:300px">
