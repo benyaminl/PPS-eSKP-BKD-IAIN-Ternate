@@ -137,21 +137,22 @@
     <tbody>
         @foreach ($kategori as $k)
         <tr>
-            <th colspan=4>{{ $k->Bidang }}</th>
+            <th colspan=8>{{ $k->Bidang }}</th>
         </tr>
-        @for ($i = 0; $i < count($detail); $i++) @if ($detail[$i]->Bidang == $k->Bidang)
-            <tr>
-                <td>{{ $i+1 }}</td>
-                <td>{{ $detail[$i]->Jenis_Kegiatan }}</td>
-                <td>{{ $detail[$i]->Bukti_Penugasan }}</td>
-                <td>{{ $detail[$i]->SKS_RBKD }}</td>
-                <td>{{ $detail[$i]->Masa_Penugasan }}</td>
-                <td>{{ $detail[$i]->Bukti_Dokumen }}</td>
-                <td>{{ $detail[$i]->SKS_LKD }}</td>
-            </tr>
-            @endif
+            @for ($i = 0; $i < count($detail); $i++) 
+                @if ($detail[$i]->Bidang == $k->Bidang)
+                <tr>
+                    <td>{{ $i+1 }}</td>
+                    <td>{{ $detail[$i]->Jenis_Kegiatan }}</td>
+                    <td>{{ $detail[$i]->Bukti_Penugasan }}</td>
+                    <td>{{ $detail[$i]->SKS_RBKD }}</td>
+                    <td>{{ (isset($detail[$i]->NilaiBKD->Masa_Penugasan)) ? $detail[$i]->NilaiBKD->Masa_Penugasan : " " }}</td>
+                    <td>{{ (isset($detail[$i]->NilaiBKD->Bukti_Dokumen)) ? $detail[$i]->NilaiBKD->Bukti_Dokumen : " " }}</td>
+                    <td>{{ (isset($detail[$i]->NilaiBKD->SKS_LKD)) ? $detail[$i]->NilaiBKD->SKS_LKD : " " }}</td>
+                </tr>
+                @endif
             @endfor
-            @endforeach
+        @endforeach
     </tbody>
 </table>
 <br />
