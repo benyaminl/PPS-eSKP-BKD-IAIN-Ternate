@@ -69,7 +69,12 @@ class HeaderSKP extends Model
 
     public function getStatusPenilaian() {
         $jumlah = PenilaianSKP::whereIdHeader($this->id)->count();
-        return $jumlah > 0;
+        $total = 0; $total += $jumlah > 0 ;
+
+        $jumlah = PenilaianPerilakuKerja::whereIdHeader($this->id)->count();
+        $total += $jumlah > 0 ;
+        // dd($total);
+        return $total;
     }
 
     /**
@@ -77,8 +82,11 @@ class HeaderSKP extends Model
      * @return string
      */
     public function getStatusPenilaianString() {
-        if ($this->getStatusPenilaian())
+        $status = $this->getStatusPenilaian();
+        if ($status == 1 )
             return "Tugas Jabatan Sudah Dinilai";
+        else if ($status == 2)
+            return "Tugas Jabatan dan Perilaku Sudah Dinilai";
         else 
             return "Belum Dinilai";
     }
