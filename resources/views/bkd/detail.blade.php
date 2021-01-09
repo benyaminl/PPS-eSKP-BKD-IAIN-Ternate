@@ -147,7 +147,7 @@
                     <th>Bidang</th>
                     <th>Jenis_Kegiatan</th>
                     <th>Bukti_Penugasan</th>
-                    <th>SKS/th>
+                    <th>SKS</th>
 
                     <th class="action">Action</th>
                 </thead>
