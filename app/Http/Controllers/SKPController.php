@@ -85,8 +85,8 @@ class SKPController extends Controller
         $header = HeaderSKP::findOrFail($id);
         $nama = Auth::user()->nama ?? "Benyamin";
         $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
-        $start = $header->tanggal_awal;
-        $end = $header->tanggal_akhir;
+        $start = $header->tanggal_awal->format("Y-m-d");
+        $end = $header->tanggal_akhir->format("Y-m-d");
         return \view("skp/detail-add", [
             "header" => $header,
             "nama" => $nama,
