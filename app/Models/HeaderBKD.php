@@ -32,10 +32,10 @@ class HeaderBKD extends Model
         return $this->hasOneThrough(
             "App\Models\Pegawai",
             "App\Models\HubunganPegawai",
-            "id_bawahan", // ID di HubunganPegawai / Tabel Penengah 
-            "id", // ID di Tabel Pegawai 
-            "id_pegawai", // ID Di Class HeaderSKP / tabel ini 
-            "id_atasan" // ID join nya, di join hubunganPegawai dan Pegawai on pegawai.id = hubungan_pegawai.id_atasan 
+            "id_bawahan", // ID di HubunganPegawai / Tabel Penengah
+            "id", // ID di Tabel Pegawai
+            "id_pegawai", // ID Di Class HeaderSKP / tabel ini
+            "id_atasan" // ID join nya, di join hubunganPegawai dan Pegawai on pegawai.id = hubungan_pegawai.id_atasan
         );
     }
 
