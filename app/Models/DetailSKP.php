@@ -11,5 +11,7 @@ class DetailSKP extends Model
     protected $primaryKey = 'id';
     protected $table = 'detail_skp';
     
-
+    public function Penilaian() {
+        return $this->hasOne("App\Models\PenilaianSKP", "id_detail", "id");
+    }
 }

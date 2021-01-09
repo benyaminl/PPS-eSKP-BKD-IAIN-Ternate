@@ -97,4 +97,17 @@ class PenilaianSKPController extends Controller
 
         return redirect()->back()->with("success", "Nilai Jabatan sudah disimpan!");
     }
+
+    public function printRealisasi($id) {
+        $data   = HeaderSKP::find($id);
+        $detail = $data->detail;
+        $tugasTambahan = $data->TugasTambahan;
+
+        return \view("skp/penilaian/print", [
+            "header" => $data,
+            "detail" => $detail,
+            "tugasTambahan" => $tugasTambahan,
+            "id" => $id
+        ]);
+    }
 }

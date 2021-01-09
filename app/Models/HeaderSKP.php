@@ -94,12 +94,14 @@ class HeaderSKP extends Model
     public function getNilaiTugasTambahan() {
         $jumlah = $this->Detail->count();
 
-        if ($jumlah <= 3)
+        if ($jumlah <= 3 AND $jumlah >=1)
             return 1;
         else if ($jumlah >=4 AND $jumlah <= 6)
             return 2;
-        else 
+        else if ($jumlah > 6)
             return 3;
-        
+        else 
+            return 0;
+            
     }
 }
