@@ -22,8 +22,8 @@
                     <td>{{ $nama }}</td>
                 </tr>
                 <tr>
-                    <th>Fakultas</th>
-                    <td>{{ $fak_dept }}</td>
+                    <th>Departemen</th>
+                    <td>{{ $departemen }}</td>
                 </tr>
             </table>
             <div class="row">
@@ -53,29 +53,10 @@
                     <div class="mb-5" style="margin-bottom: 2.3rem !important;"></div>/
                 </div>
                 <div class="col-12 col-md-3">
-                    <label> </label>
+                    <label> SKS</label>
                     <input type="text" min="0" name="output" value="{{ old('output') }}" class="form-control mt-1" placeholder="dokumen,laporan,buah,dsb">
                 </div>
-                <div class="col-12">
-                    <label>Kualitas Mutu</label>
-                    <input type="number" min="0" placeholder="10/100/1000" name="kual_mutu" value="{{ old('kual_mutu') }}" class="form-control">
-                </div>
-                <div class="col-12 col-md-5">
-                    <label>Waktu/Satuan</label>
-                    <input type="number" min="0" name="waktu" value="{{ old('waktu') }}" class="form-control">
-                </div>
-                <div class="col-md-1 d-sm-none d-md-block">
-                    <div class="mb-5" style="margin-bottom: 2.3rem !important;"></div>/
-                </div>
-                <div class="col-12 col-md-3">
-                    <label> </label>
-                    <select class="form-control mt-1" name="satuan">
-                        <option value=0>Silahkan pilih Waktu</option>
-                        <option>Bulan</option>
-                        <option>Minggu</option>
-                        <option>Hari</option>
-                    </select>
-                </div>
+
 
             </div>
             <br />

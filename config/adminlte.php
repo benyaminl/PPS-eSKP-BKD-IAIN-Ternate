@@ -291,25 +291,11 @@ return [
             // 'label_color' => 'success',
         ],
         [
-            'text'    => 'Input RBKD',
-            'url'         => 'bkd/pendidikan',
+            'text'    => 'Tambah RBKD',
+            'url'         => 'bkd/add',
             'icon'    => 'fas fa-fw fa-plus',
         ],
-        [
-            'text'    => 'Verifikasi RBKD',
-            'url'         => 'bkd/verify',
-            'icon'    => 'fas fa fa-user-check',
-        ],
-        [
-            'text'    => 'Input LKD',
-            'url'         => 'lkd/add',
-            'icon'    => 'fas fa-fw fa-plus',
-        ],
-        [
-            'text'    => 'Verifikasi LKD',
-            'url'         => 'lkd/verify',
-            'icon'    => 'fas fa fa-user-check',
-        ],
+
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

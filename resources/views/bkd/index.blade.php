@@ -4,7 +4,7 @@
 {{-- Allow DataTable --}}
 @section('plugins.Datatables', true)
 
-@section('title', 'List BKD | ESKP BKD IAIN TERNATE')
+@section('title', 'List RBKD | ESKP BKD IAIN TERNATE')
 
 @section('content_header')
 <h1>BKD IAIN Ternate</h1>
@@ -39,7 +39,7 @@
                 <th>Tanggal Pengajuan</th>
                 <th>Tanggal Pengesahan</th>
                 <th>Status</th>
-                <th>Fakultas</th>
+                <th>Departemen</th>
                 <th class="action">Action</th>
             </thead>
 
@@ -50,7 +50,7 @@
                     <td>{{ ($d->tanggal_pengajuan != null) ? $d->tanggal_pengajuan->format("d-m-Y H:i") : "-" }}</td>
                     <td>{{ ($d->tanggal_pengesahan != null) ? $d->tanggal_pengesahan->format("d-m-Y H:i") : "-" }}</td>
                     <td>{{ $d->getStatusString() }}</td>
-                    <td>{{ $d->Pegawai->fak_dept }}</td>
+                    <td>{{ $d->Pegawai->biro }}</td>
                     <td>
                         <a href="{{ url("bkd/".$d->id."/detail") }}" class="btn btn-primary">Detail</a>
                     </td>

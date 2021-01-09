@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class BKDController extends Controller
 {
-    public function index()
-    {
-        $pegawai = \App\Models\Pegawai::all();
-        return view('bkd.index', ['pegawai' => $pegawai]);
-    }
+
     public function list(Request $request)
     {
         $start = $request->input("tanggal-start") ?? date("Y") . "-01-01";
@@ -34,12 +30,12 @@ class BKDController extends Controller
     public function addHeaderForm()
     {
         $nama = Auth::user()->nama ?? "Benyamin";
-        $fak_dept = Auth::user()->fak_dept ?? "Tarbiyah";
+        $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
         $start = date("Y") . "-01-01";
         $end   = date("Y") . "-12-31";
         return \view("bkd/add", [
             "nama" => $nama,
-            "fak_dept" => $fak_dept,
+            "departement" => $departemen,
             "start" => $start,
             "end" => $end
         ]);
@@ -72,7 +68,7 @@ class BKDController extends Controller
 
         $nama = Auth::user()->nama ?? "Benyamin";
         $departemen = Auth::user()->biro ?? "Sistem Informasi Bisnis";
-        return \view("skp/detail", [
+        return \view("bkd/detail", [
             "header" => $header,
             "detail" => $detail,
 
@@ -118,7 +114,7 @@ class BKDController extends Controller
         $detail->SKS_RBKD          = $valid["waktu"];
         $detail->save();
 
-        return redirect()->back()->with("success", "Berhasil menambah BKD baru");
+        return redirect()->back()->with("success", "Berhasil menambah RBKD baru");
     }
 
     public function deleteDetail(Request $request)

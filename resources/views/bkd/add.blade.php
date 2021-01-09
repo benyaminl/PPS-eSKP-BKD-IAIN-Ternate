@@ -21,10 +21,7 @@
                     <th>Nama Lengkap</th>
                     <td>{{ $nama }}</td>
                 </tr>
-                <tr>
-                    <th>Fakultas</th>
-                    <td>{{ $fak_dept }}</td>
-                </tr>
+                <!-- saya hapus departemen disini karena error -->
             </table>
             <div class="row">
                 <div class="form-group col-6">

@@ -96,7 +96,7 @@
                 {{-- Hanya tampilkan kalau BKD sudah validated --}}
                 @if ($header->status_skp == 3 && $isValidasi == false)
                 <a href="{{ url('/bkd/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
-                    <i class="fas fa-print"></i> Print SKP
+                    <i class="fas fa-print"></i> Print BKD
                 </a>
                 @endif
                 @if ($header->status_bkd == 0 && $isValidasi == false)
@@ -127,7 +127,7 @@
                 </form>
                 @endif
 
-                @if ($isPengesahan AND $header->status_skp == 2)
+                @if ($isPengesahan AND $header->status_bkd == 2)
                 {{-- Kalau Pengesahan --}}
                 <form method="POST" class="d-inline-block float-right mr-2">
                     @method("POST")
@@ -139,7 +139,7 @@
             </div>
         </div>
 
-        <h3>Tugas Jabatan</h3>
+        <h3>RBKD</h3>
         <div class="table-responsive">
             <table class="table responsive nowrap" style="width:100%" id="tugasJabatan">
                 <thead>
@@ -185,6 +185,6 @@
 @stop --}}
 @section('js')
 <script>
-    $("#BKD").DataTable();
+    $("#Bidang").DataTable();
 </script>
 @stop
