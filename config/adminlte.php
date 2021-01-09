@@ -302,7 +302,20 @@ return [
             // 'label'       => 4,
             // 'label_color' => 'success',
         ],
-
+        [
+            'text'        => 'Pengesahan RBKD',
+            'url'         => 'bkd/pengesahan',
+            'icon'        => 'fas fa-calendar-check',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Penilaian LKD',
+            'url'         => 'bkd/penilaian',
+            'icon'        => 'fas fa-poll',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
