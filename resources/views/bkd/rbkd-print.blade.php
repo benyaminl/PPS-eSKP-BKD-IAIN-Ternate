@@ -24,17 +24,17 @@
         height: 3cm;
         float: left;
     }
-    
+
     .kop {
         width: 15cm;
         height: 3cm;
         float: left;
     }
-    
+
     .img-fluid {
         width: 100%
     }
-    
+
     body {
         max-width: 21cm;
     }
@@ -63,8 +63,8 @@
 <br/>
 <table>
     <tr>
-        <th>Nama</th>
-        <td>Dr. Gunawan M.Pd., M.Ed.</td>
+        <th class="text-left">Nama</th>
+        <td class="text-left">Dr. Gunawan M.Pd., M.Ed.</td>
     </tr>
     <tr>
         <th>No. Sertifikat</th>
@@ -101,11 +101,11 @@
     <tr>
         <th>Ilmu Yang Ditekuni</th>
         <td>TABIYAH & ILMU KEGURUAN</td>
-    </tr>   
+    </tr>
     <tr>
         <th>No. HP</th>
         <td>081234567890</td>
-    </tr>    
+    </tr>
 </table>
 <br/><br/>
 <table border=1 style="width: 21cm;">
