@@ -58,7 +58,7 @@
 <hr/>
 <br/>
 <br/>
-<h2 class="text-center">FORMULIR SASARAN KERJA</h2>
+<h2 class="text-center">REALISASI SASARAN KERJA</h2>
 <h4 class="text-center">PEGAWAI NEGERI SIPIL</h4>
 <br/>
 <br/>

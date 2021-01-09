@@ -50,7 +50,7 @@
             <div class="col-12 mb-3">
                 {{-- Hanya tampilkan kalau SKP sudah validated --}}
                 @if ($header->status_skp == 3 && $isValidasi == false)
-                <a href="{{ url('/skp/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
+                <a href="{{ url('/skp/penilaian/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
                     <i class="fas fa-print"></i> Print SKP
                 </a>           
                 @endif
