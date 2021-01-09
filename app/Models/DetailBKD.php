@@ -10,4 +10,8 @@ class DetailBKD extends Model
     use HasFactory;
     protected $primaryKey = 'id';
     protected $table = 'detail_bkd';
+
+    public function NilaiBKD() {
+        return $this->hasOne("App\Models\PenilaianBKD", "id_detail", "id");
+    }
 }

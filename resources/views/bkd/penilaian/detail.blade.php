@@ -94,13 +94,13 @@
             </div>
             <div class="col-12 mb-3">
                 {{-- Hanya tampilkan kalau LKD sudah validated --}}
-                @if ($header->status_skp == 3 && $isValidasi == false)
-                <a href="{{ url('/skp/'.$header->id.'/print') }}" class="btn btn-secondary float-right">
-                    <i class="fas fa-print"></i> Print SKP
+                @if ($header->status_bkd == 3 && $isValidasi == false)
+                <a href="{{ url('/bkd/penilaian/'.$header->id.'/printLKD') }}" class="btn btn-secondary float-right">
+                    <i class="fas fa-print"></i> Print LKD
                 </a>
                 @endif
-                @if ($header->status_lkd == 0 && $isValidasi == false)
-                <a href="{{ url('/lkd/'.$header->id.'/detail/add') }}" class="btn btn-success float-right">
+                @if ($header->status_bkd == 0 && $isValidasi == false)
+                <a href="{{ url('/bkd/'.$header->id.'/detail/add') }}" class="btn btn-success float-right">
                     <i class="fas fa-plus"></i> Tambah LKD
                 </a>
 
@@ -112,7 +112,7 @@
                 </form>
                 @endif
                 {{-- Kalau untuk Validasi Maka --}}
-                @if ($isValidasi AND $header->status_skp == 1)
+                @if ($isValidasi AND $header->status_bkd == 1)
                 <form method="POST" class="d-inline-block float-right mr-2">
                     @method("PATCH")
                     @csrf
@@ -127,7 +127,7 @@
                 </form>
                 @endif
 
-                @if ($isPengesahan AND $header->status_skp == 2)
+                @if ($isPengesahan AND $header->status_bkd == 2)
                 {{-- Kalau Pengesahan --}}
                 <form method="POST" class="d-inline-block float-right mr-2">
                     @method("POST")
@@ -147,50 +147,44 @@
                     <thead>
 
                         <tr>
-                            <th>Angka<br />Kredit</th>
-                            <th>Kuat/<br />Output</th>
-                            <th>Kual/<br />Mutu</th>
-                            <th>Waktu</th>
-                            <th>Biaya</th>
-                            <th>Angka<br />Kredit</th>
-                            <th>Kuat/<br />Output</th>
-                            <th>Kual/<br />Mutu</th>
-                            <th>Waktu</th>
-                            <th>Biaya</th>
+                            <th>NO</th>
+                            <th>Bidang</th>
+                            </th>
+                            <th>Jenis Kegiatan</th>
+                            <th>Bukti Penugasan</th>
+                            <th>SKS</th>
+
+                            <th>Masa Penugasan</th>
+                            <th>Bukti Dokumen</th>
+                            <th>SKS</th>
+
                         </tr>
                     </thead>
                     <tbody>
+
                         @for ($i = 0; $i<count($detail); $i++) <tr>
                             <td>{{ $i+1 }} </td>
-                            <td>{{ $detail[$i]->tugas_jabatan ?? "-" }}</td>
-                            <td>{{ $detail[$i]->angka_kredit }}</td>
-                            <td>{{ $detail[$i]->kuant_output ?? "-" }}</td>
-                            <td>{{ $detail[$i]->kual_mutu ?? "-" }}</td>
-                            <td>{{ $detail[$i]->waktu ?? "-" }}</td>
-                            <td>{{ $detail[$i]->biaya ?? "-" }}</td>
+                            <td>{{ $detail[$i]->Bidang ?? "-" }}</td>
+                            <td>{{ $detail[$i]->Jenis_Kegiatan }}</td>
+                            <td>{{ $detail[$i]->Bukti_Penugasan }}</td>
+                            <td>{{ $detail[$i]->SKS_RBKD ?? "-"}}</td>
+
                             <td>
                                 <input type="hidden" name="id[]" value="{{ $detail[$i]->id }}">
-                                <input type="text" class="form-control" name="angka_kredit[]" value="{{ old('angka_kredit['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->angka_kredit : "" }}" style="max-width:60px">
+                                <input type="text" class="form-control" name="Masa_Penugasan[]" value="{{ old('Masa_Penugasan['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->Masa_Penugasan : "" }}" style="max-width:300px">
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="kuant_output[]" value="{{ old('kuant_output['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->kuant_output  : ""}}" style="max-width:60px">
-                                /{{ explode("/",$detail[$i]->kuant_output)[1] ?? "-" }}
+                                <input type="text" class="form-control" name="Bukti_Dokumen[]" value="{{ old('Bukti_Dokumen['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->Masa_Penugasan : "" }}" style="max-width:300px">
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="kual_mutu[]" value="{{ old('kual_mutu['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->kual_mutu  : ""}}" style="max-width:60px">
+                                <input type="text" class="form-control" name="SKS_LKD[]" value="{{ old('SKS_LKD['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->SKS_LKD : "" }}" style="max-width:60px">
                             </td>
-                            <td>
-                                <input type="text" class="form-control" name="waktu[]" value="{{ old('waktu['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->waktu  : ""}}" style="max-width:60px">
-                                /{{ explode("/",$detail[$i]->waktu)[1] ?? "-" }}
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" name="biaya[]" value="{{ old('biaya['.$i.']') ?? (isset($nilaiJabatan[$i])) ? $nilaiJabatan[$i]->biaya : "" }}" style="max-width:60px">
-                            </td>
+
                             </tr>
                             @endfor
                     </tbody>
                 </table>
-                <button type="submit" class="btn btn-primary float-right mt-2">Simpan Nilai Jabatan</button>
+                <button type="submit" class="btn btn-primary float-right mt-2">Simpan LKD</button>
             </div>
         </form>
         <br />
@@ -204,6 +198,6 @@
 @stop --}}
 @section('js')
 <script>
-    $("#tugasTambahan,#tugasJabatan").DataTable();
+    $("#table").DataTable();
 </script>
 @stop
