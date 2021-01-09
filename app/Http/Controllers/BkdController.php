@@ -51,6 +51,7 @@ class BKDController extends Controller
         $header = new HeaderBKD();
         $header->tanggal_draft = Carbon::now();
         $header->id_pegawai = Auth::id() ?? 1;
+        $header->status_bkd = 0;
         $header->tanggal_awal = $valid["tanggal-mulai"];
         $header->tanggal_akhir = $valid["tanggal-selesai"];
         if ($header->save())
