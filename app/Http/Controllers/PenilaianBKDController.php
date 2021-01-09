@@ -48,7 +48,7 @@ class PenilaianBKDController extends Controller
             "header" => $header,
             "detail" => $detail,
             "nama" => $nama,
-            "nilaiJabatan" => $nilaiJabatan,
+            //"nilaiJabatan" => $nilaiJabatan,
             //   "departemen" => $departemen,
 
             "isValidasi" => $isValidasi,
@@ -67,13 +67,30 @@ class PenilaianBKDController extends Controller
                 $nilai = PenilaianBKD::whereIdDetail($request->input("id")[$i])->first();
             $nilai->id_header      = $id;
             $nilai->id_detail      = $request->input("id")[$i];
-            $nilai->angka_kredit   = $request->input("Masa_Penugasan")[$i];
-            $nilai->kual_mutu      = $request->input("Bukti_Dokumen")[$i];
-            $nilai->waktu          = $request->input("SKS_LKD")[$i];
+            $nilai->Masa_Penugasan  = $request->input("Masa_Penugasan")[$i];
+            $nilai->Bukti_Dokumen      = $request->input("Bukti_Dokumen")[$i];
+            $nilai->SKS_LKD          = $request->input("SKS_LKD")[$i];
 
             $nilai->save();
         }
 
         return redirect()->back()->with("success", "laporan Kinerja Dosen sudah disimpan!");
+    }
+
+    public function printLKD($id)
+    {
+        $data = HeaderBKD::find($id);
+        $detail = $data->detail;
+        $kategori = DetailBKD::query()->select("Bidang")
+            ->where("id_header", "=", $id)
+            ->groupBy("Bidang")
+            ->get();
+        // dd($kategori);
+        return \view("bkd/penilaian/printLKD", [
+            "header"   => $data,
+            "detail"   => $detail,
+            "kategori" => $kategori,
+            "id" => $id
+        ]);
     }
 }
