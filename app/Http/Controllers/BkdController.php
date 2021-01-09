@@ -134,7 +134,7 @@ class BKDController extends Controller
     {
         $start = $request->input("tanggal-start") ?? date("Y") . "-01-01";
         $end   = $request->input("tanggal-end") ?? date("Y") . "-12-31";
-        $data  = HeaderBKD::whereStatusBKD(1)->where("tanggal_awal", ">=", $start)->where("tanggal_akhir", "<=", $end)->get();
+        $data  = HeaderBKD::wherestatus_bkd(1)->where("tanggal_awal", ">=", $start)->where("tanggal_akhir", "<=", $end)->get();
 
 
         return \view("bkd/validasi", [
@@ -148,7 +148,7 @@ class BKDController extends Controller
     {
         $start = $request->input("tanggal-start") ?? date("Y") . "-01-01";
         $end   = $request->input("tanggal-end") ?? date("Y") . "-12-31";
-        $data  = HeaderBKD::whereStatusBKD(2)
+        $data  = HeaderBKD::whereStatusBkd(2)
             ->where("tanggal_awal", ">=", $start)
             ->where("tanggal_akhir", "<=", $end)
             ->whereRaw("header_bkd.id_pegawai in (select id_bawahan from hubungan_pegawai where id_atasan = ?)", [Auth::id() ?? "2"])
