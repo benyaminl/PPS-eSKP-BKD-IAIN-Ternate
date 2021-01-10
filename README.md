@@ -41,3 +41,6 @@ Halaman nya pada aplikasi ini ada di http://`<base url>`/skp/`<id>`/print/qr
 
 ### Acknoledgement
 Thanks to Dr. Ir. Aris Tjahyanto, M.Kom. and IAIN Ternate (esp Abd Rahman and it's affliate) to accomplish this project mock. 
+
+### Show Case App
+Untuk melihat Show case dari aplikasi bisa dilihat di https://deploy.benyamin.xyz/pps/public/skp
